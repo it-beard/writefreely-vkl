@@ -69,14 +69,13 @@
 					{{else}}
 					    <a href="/about"{{if eq .Path "/about"}} class="selected"{{end}}>Пра нас</a>
 						<a href="/me/c/"{{if eq .Path "/me/c/"}} class="selected"{{end}}>Мае блогі</a>
-						{{if not .DisableDrafts}}<a href="/me/posts/"{{if eq .Path "/me/posts/"}} class="selected"{{end}}>Чарнавікі3</a>{{end}}
+						{{if not .DisableDrafts}}<a href="/me/posts/"{{if eq .Path "/me/posts/"}} class="selected"{{end}}>Чарнавікі</a>{{end}}
 						{{if and (and .LocalTimeline .CanViewReader) (not .Chorus)}}<a href="/read">Стужка</a>{{end}}
 					{{end}}
 				</nav>
 			</nav>
 			{{if .Username}}
 				<div class="right-side">
-					<!--<a class="simple-btn" href="/{{if .CollAlias}}#{{.CollAlias}}{{end}}">Новы Допіс</a> -->
 					<a class="simple-btn" href="/new">Новы Допіс</a>
 				</div>
 			{{end}}
@@ -84,7 +83,9 @@
 		</nav>
 	</header>
 {{end}}
-{{define "header"}}<!DOCTYPE HTML>
+
+{{define "header"}}
+<!DOCTYPE HTML>
 <html>
 <head>
 	<meta charset="utf-8">

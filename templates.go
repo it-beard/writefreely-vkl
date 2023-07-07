@@ -70,13 +70,11 @@ func initTemplate(parentDir, name string) {
 		filepath.Join(parentDir, templatesDir, "include", "footer.tmpl"),
 		filepath.Join(parentDir, templatesDir, "base.tmpl"),
 		filepath.Join(parentDir, templatesDir, "user", "include", "silenced.tmpl"),
+		filepath.Join(parentDir, templatesDir, "user", "include", "header.tmpl"),
 	}
 	if name == "collection" || name == "collection-tags" || name == "chorus-collection" || name == "read" {
 		// These pages list out collection posts, so we also parse templatesDir + "include/posts.tmpl"
 		files = append(files, filepath.Join(parentDir, templatesDir, "include", "posts.tmpl"))
-	}
-	if name == "chorus-collection" || name == "chorus-collection-post" {
-		files = append(files, filepath.Join(parentDir, templatesDir, "user", "include", "header.tmpl"))
 	}
 	if name == "collection" || name == "collection-tags" || name == "collection-post" || name == "post" || name == "chorus-collection" || name == "chorus-collection-post" {
 		files = append(files, filepath.Join(parentDir, templatesDir, "include", "post-render.tmpl"))
@@ -94,6 +92,7 @@ func initPage(parentDir, path, key string) {
 		filepath.Join(parentDir, templatesDir, "include", "footer.tmpl"),
 		filepath.Join(parentDir, templatesDir, "base.tmpl"),
 		filepath.Join(parentDir, templatesDir, "user", "include", "silenced.tmpl"),
+		filepath.Join(parentDir, templatesDir, "user", "include", "header.tmpl"),
 	}
 
 	if key == "login.tmpl" || key == "landing.tmpl" || key == "signup.tmpl" {
