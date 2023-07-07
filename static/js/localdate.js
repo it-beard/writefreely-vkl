@@ -1,6 +1,6 @@
 function toLocalDate(dateEl, displayEl) {
 	var d = new Date(dateEl.getAttribute("datetime"));
-	displayEl.textContent = d.toLocaleDateString(navigator.language || "en-US", { year: 'numeric', month: 'long', day: 'numeric' });
+	displayEl.textContent = d.toLocaleDateString(navigator.language || "be-BY", { year: 'numeric', month: 'long', day: 'numeric' });
 }
 
 // Adjust dates on individual post pages, and on posts in a list *with* an explicit title

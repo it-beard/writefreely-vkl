@@ -205,9 +205,10 @@
 			}
 			params.token = token;
 			{{ else }}
-			var lang = navigator.languages ? navigator.languages[0] : (navigator.language || navigator.userLanguage);
-			lang = lang.substring(0, 2);
-			params.lang = lang;
+			// var lang = navigator.languages ? navigator.languages[0] : (navigator.language || navigator.userLanguage);
+			// lang = lang.substring(0, 2);
+			// params.lang = lang;
+			params.lang = "be"; // Belarusian as a default language on post creation
 
 			var url = "/api/posts";
 			var postTarget = H.get('postTarget', 'anonymous');

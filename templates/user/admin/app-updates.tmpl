@@ -34,7 +34,7 @@
 	// Code modified from /js/localdate.js
 	var displayEl = document.querySelector("time");
 	var d = new Date(displayEl.getAttribute("datetime"));
-	displayEl.textContent = d.toLocaleDateString(navigator.language || "en-US", { dateStyle: 'long', timeStyle: 'short' });
+	displayEl.textContent = d.toLocaleDateString(navigator.language || "be-BY", { dateStyle: 'long', timeStyle: 'short' });
 	</script>
 {{ else }}
 	<p class="intro disabled">Automated update checks are disabled.</p>

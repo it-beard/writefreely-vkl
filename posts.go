@@ -1468,11 +1468,11 @@ func viewCollectionPost(app *App, w http.ResponseWriter, r *http.Request) error 
 			po := &Post{
 				Slug:     null.NewString(slug, true),
 				Font:     "norm",
-				Language: zero.NewString("en", true),
+				Language: zero.NewString("be", true),
 				RTL:      zero.NewBool(false, true),
 				Content: `<p class="msg">Старонка не знойдзена.</p>
 
-Are you sure it was ever here?`,
+Вы ўпэўнены, што яна тут была?`,
 			}
 			pp := po.processPost()
 			p = &pp
