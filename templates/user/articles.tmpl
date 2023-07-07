@@ -31,7 +31,6 @@
 			<date datetime="{{.Created}}" pubdate itemprop="datePublished" content="{{.Created}}">{{.DisplayDate}}</date>
 			<a class="action" href="/{{if $.SingleUser}}d/{{end}}{{.ID}}/edit">рэдагаваць</a>
 			<a class="delete action" href="/{{.ID}}" onclick="delPost(event, '{{.ID}}', true)">выдаліць</a>
-			
 			{{if ne $el.Font "code"}}
 			{{ if $.Collections }}
 			{{if gt (len $.Collections) 1}}<div class="action flat-select">

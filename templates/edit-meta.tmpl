@@ -2,7 +2,7 @@
 <html>
 	<head>
 
-		<title>Edit metadata: {{if .Post.Title}}{{.Post.Title}}{{else}}{{.Post.Id}}{{end}} &mdash; {{.SiteName}}</title>
+		<title>Рэдагаванне метададзеных: {{if .Post.Title}}{{.Post.Title}}{{else}}{{.Post.Id}}{{end}} &mdash; {{.SiteName}}</title>
 		
 		<link rel="stylesheet" type="text/css" href="/css/write.css" />
 		{{if .CustomCSS}}<link rel="stylesheet" type="text/css" href="/local/custom.css" />{{end}}
@@ -26,8 +26,12 @@
 			font-weight: normal;
 			margin-left: 1em;
 		}
-		.content-container h2 a:link, .content-container h2 a:visited {
-			color: blue;
+		.content-container h2 a:link, 
+		.content-container h2 a:visited,
+		a.meta-link:link,
+		a.meta-link:visited
+		{
+			color: #447bfe;
 		}
 		.content-container h2 a:hover {
 			text-decoration: underline;
@@ -41,7 +45,7 @@
 			<div id="clip">
 				<h1><a href="/me/c/" title="View blogs"><img class="ic-24dp" src="/img/ic_blogs_dark@2x.png" /></a></h1>
 				<nav id="target" class=""><ul>
-						<li>{{if .EditCollection}}<a href="{{.EditCollection.CanonicalURL}}">{{.EditCollection.Title}}</a>{{else}}<a>Draft</a>{{end}}</li>
+						<li>{{if .EditCollection}}<a href="{{.EditCollection.CanonicalURL}}">{{.EditCollection.Title}}</a>{{else}}<a>Чарнавік</a>{{end}}</li>
 				</ul></nav>
 			</div>
 			<div id="belt">
@@ -53,7 +57,8 @@
 		
 		<div class="content-container tight">
 			<form action="/api/{{if .EditCollection}}collections/{{.EditCollection.Alias}}/{{end}}posts/{{.Post.Id}}" method="post" onsubmit="return updateMeta()">
-				<h2>Edit metadata: {{if .Post.Title}}{{.Post.Title}}{{else}}{{.Post.Id}}{{end}} <a href="/{{if .EditCollection}}{{if not .SingleUser}}{{.EditCollection.Alias}}/{{end}}{{.Post.Slug}}{{else}}{{if .SingleUser}}d/{{end}}{{.Post.Id}}{{end}}">view post</a></h2>
+				<h3>Рэдагаванне метададзеных</h3>
+				<h2>{{if .Post.Title}}{{.Post.Title}}{{else}}{{.Post.Id}}{{end}} <a href="/{{if .EditCollection}}{{if not .SingleUser}}{{.EditCollection.Alias}}/{{end}}{{.Post.Slug}}{{else}}{{if .SingleUser}}d/{{end}}{{.Post.Id}}{{end}}" class="meta-link">глядзець допіс</a></h2>
 
 				{{if .Flashes}}<ul class="errors">
 					{{range .Flashes}}<li class="urgent">{{.}}</li>{{end}}
@@ -64,7 +69,7 @@
 					<dt><label for="slug">Slug</label></dt>
 					<dd><input type="text" id="slug" name="slug" value="{{.Post.Slug}}" /></dd>
 					{{end}}
-					<dt><label for="lang">Language</label></dt>
+					<dt><label for="lang">Мова</label></dt>
 					<dd>
 						<select name="lang" id="lang" dir="auto" class="inputform">
 							<option value=""></option>
@@ -254,14 +259,14 @@
 							<option value="zu"{{if eq "zu" .Post.Language.String}} selected="selected"{{end}}>isiZulu</option>
 						</select>
 					</dd>
-					<dt><label for="rtl">Direction</label></dt>
-					<dd><input type="checkbox" id="rtl" name="rtl" {{if .Post.IsRTL.Bool}}checked="checked"{{end}} /><label for="rtl"> right-to-left</label></dd>
-					<dt><label for="created">Created</label></dt>
+					<dt><label for="rtl">Напісанне</label></dt>
+					<dd><input type="checkbox" id="rtl" name="rtl" {{if .Post.IsRTL.Bool}}checked="checked"{{end}} /><label for="rtl"> справа налева</label></dd>
+					<dt><label for="created">Створана</label></dt>
 					<dd>
-						<input type="text" id="created" name="created" value="{{.Post.UserFacingCreated}}" data-time="{{.Post.Created8601}}" placeholder="YYYY-MM-DD HH:MM:SS" maxlength="19" /> <span id="tz">UTC</span> <a href="#" id="set-now">now</a>
-						<p class="error" id="create-error">Date format should be: <span class="mono"><abbr title="The full year">YYYY</abbr>-<abbr title="The numeric month of the year, where January = 1, with a zero in front if less than 10">MM</abbr>-<abbr title="The day of the month, with a zero in front if less than 10">DD</abbr> <abbr title="The hour (00-23), with a zero in front if less than 10.">HH</abbr>:<abbr title="The minute of the hour (00-59), with a zero in front if less than 10.">MM</abbr>:<abbr title="The seconds (00-59), with a zero in front if less than 10.">SS</abbr></span></p>
+						<input type="text" id="created" name="created" value="{{.Post.UserFacingCreated}}" data-time="{{.Post.Created8601}}" placeholder="YYYY-MM-DD HH:MM:SS" maxlength="19" /> <span id="tz">UTC</span> <a href="#" class="meta-link" id="set-now">зараз</a>
+						<p class="error" id="create-error">Дата павінна мець наступны фармат: <span class="mono"><abbr title="The full year">YYYY</abbr>-<abbr title="The numeric month of the year, where January = 1, with a zero in front if less than 10">MM</abbr>-<abbr title="The day of the month, with a zero in front if less than 10">DD</abbr> <abbr title="The hour (00-23), with a zero in front if less than 10.">HH</abbr>:<abbr title="The minute of the hour (00-59), with a zero in front if less than 10.">MM</abbr>:<abbr title="The seconds (00-59), with a zero in front if less than 10.">SS</abbr></span></p>
 					</dd>
-					<dt>&nbsp;</dt><dd><input type="submit" value="Save changes" /></dd>
+					<dt>&nbsp;</dt><dd><input type="submit" value="Захаваць змяненні" /></dd>
 				</dl>
 				<input type="hidden" name="web" value="true" />
 			</form>

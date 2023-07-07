@@ -29,14 +29,14 @@
 			<div id="clip">
 				{{if not .SingleUser}}<h1><a href="/me/c/" title="View blogs"><img class="ic-24dp" src="/img/ic_blogs_dark@2x.png" /></a></h1>{{end}}
 				<nav id="target" {{if .SingleUser}}style="margin-left:0"{{end}}><ul>
-						{{if .Editing}}<li>{{if .EditCollection}}<a href="{{.EditCollection.CanonicalURL}}">{{.EditCollection.Title}}</a>{{else}}<a>Draft</a>{{end}}</li>
-						{{else}}<li><a id="publish-to"><span id="target-name">Draft</span> <img class="ic-18dp" src="/img/ic_down_arrow_dark@2x.png" /></a>
+						{{if .Editing}}<li>{{if .EditCollection}}<a href="{{.EditCollection.CanonicalURL}}">{{.EditCollection.Title}}</a>{{else}}<a>Чарнавік</a>{{end}}</li>
+						{{else}}<li><a id="publish-to"><span id="target-name">Чарнавік</span> <img class="ic-18dp" src="/img/ic_down_arrow_dark@2x.png" /></a>
 						<ul>
 							<li class="menu-heading">Publish to...</li>
 							{{if .Blogs}}{{range $idx, $el := .Blogs}}
 								<li class="target{{if eq $idx 0}} selected{{end}}" id="blog-{{$el.Alias}}"><a href="#{{$el.Alias}}"><i class="material-icons md-18">public</i> {{if $el.Title}}{{$el.Title}}{{else}}{{$el.Alias}}{{end}}</a></li>
 							{{end}}{{end}}
-							<li class="target" id="blog-anonymous"><a href="#anonymous"><i class="material-icons md-18">description</i> <em>Draft</em></a></li>
+							<li class="target" id="blog-anonymous"><a href="#anonymous"><i class="material-icons md-18">description</i> <em>Чарнавік</em></a></li>
 							<li id="user-separator" class="separator"><hr /></li>
 						{{ if .SingleUser }}
 							<li><a href="/"><i class="material-icons md-18">launch</i> View Blog</a></li>
