@@ -67,7 +67,7 @@
 		<footer dir="ltr">
 			<hr>
 			<nav>
-				<p style="font-size: 0.9em"><a class="home pubd" href="/">{{.SiteName}}</a> &middot; powered by <a style="margin-left:0" href="https://writefreely.org">writefreely</a></p>
+				<p style="font-size: 0.9em"><a class="home pubd" href="/">{{.SiteName}}</a> &middot; Працуе на базе адаптаванай версіі <a href="https://github.com/it-beard/writefreely-vkl">WriteFreely</a></p>
 			</nav>
 		</footer>
 		{{ end }}
@@ -92,7 +92,7 @@ function delPost(e, id, owned) {
 	}
 
 	// TODO: UNDO!
-	if (window.confirm('Are you sure you want to delete this post?')) {
+	if (window.confirm('Вы дакладна жадаеце выдаліць гэты допіс?')) {
 		// AJAX
 		deletePost(id, "", function() {
 			// Remove post from list

@@ -34,18 +34,23 @@
 		{{if .Author}}<meta property="article:author" content="https://{{.Author}}" />{{end}}
 		<!-- Add highlighting logic -->
 		{{template "highlighting" .}}
+		<style>
+			header h1 {
+				font-family: Lora,'Palatino Linotype','Book Antiqua','New York','DejaVu serif',serif !important;
+			}
+		</style>
 	</head>
 	<body id="post">
 		<header>
 			<h1 dir="{{.Direction}}"><a href="/">{{.SiteName}}</a></h1>
 			<nav>
-				<span class="views{{if not .IsOwner}} owner-visible{{end}}" dir="ltr"><strong>{{largeNumFmt .Views}}</strong> {{pluralize "view" "views" .Views}}</span>
-				{{if .IsCode}}<a href="/{{.ID}}.txt" rel="noindex" dir="{{.Direction}}">View raw</a>{{end}}
+				<span class="views{{if not .IsOwner}} owner-visible{{end}}" dir="ltr">Праглядаў: <strong>{{largeNumFmt .Views}}</strong></span>
+				{{if .IsCode}}<a href="/{{.ID}}.txt" rel="noindex" dir="{{.Direction}}">Праглядзець зыходнік</a>{{end}}
 				{{ if .Username }}
 				{{if .IsOwner}}
-				<a href="/{{if .SingleUser}}d/{{end}}{{.ID}}/edit" dir="{{.Direction}}">Edit</a>
+				<a href="/{{if .SingleUser}}d/{{end}}{{.ID}}/edit" dir="{{.Direction}}">Рэдагаваць</a>
 				{{end}}
-				<a class="xtra-feature dash-nav" href="/me/posts/" dir="{{.Direction}}">Drafts</a>
+				<a class="xtra-feature dash-nav" href="/me/posts/" dir="{{.Direction}}">Чарнавікі</a>
 				{{ end }}
 			</nav>
 		</header>
@@ -56,7 +61,17 @@
 		
 		<article class="{{.Font}} h-entry">{{if .Title}}<h2 id="title" class="p-name">{{.Title}}</h2>{{end}}{{ if .IsPlainText }}<p id="post-body" class="e-content">{{.Content}}</p>{{ else }}<div id="post-body" class="e-content">{{.HTMLContent}}</div>{{ end }}</article>
 
-		<footer dir="ltr"><hr><nav><p style="font-size: 0.9em">{{localhtml "published with write.as" .Language}}</p></nav></footer>
+		<footer dir="ltr">
+			<hr>
+			<nav>
+				<a class="home" href="/">{{.SiteName}}</a>
+				<a href="/about">Пра нас</a>
+				{{if and .LocalTimeline .CanViewReader}}<a href="/read">Стужка</a>{{end}}
+				{{if .Username}}<a href="https://writefreely.org/guide/{{.OfficialVersion}}" target="guide">Інструкцыя для аўтараў</a>{{end}}
+				<a href="/privacy">Палітыка прыватнасці</a>
+				<p style="font-size: 0.9em">Працуе на базе адаптаванай версіі <a href="https://github.com/it-beard/writefreely-vkl">WriteFreely</a></p>
+			</nav>
+		</footer>
 	</body>
 	
 	{{if .IsCode}}
@@ -68,6 +83,7 @@
 	<script src="/js/h.js"></script>
 	{{if .IsPlainText}}<script src="/js/twitter-text.min.js"></script>{{end}}
 	{{end}}
+	<script src="/js/twitter-text.min.js"></script>
 	<script type="text/javascript">
 	try {
 	  WebFontConfig = {

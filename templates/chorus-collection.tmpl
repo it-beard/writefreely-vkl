@@ -34,12 +34,13 @@
 body#collection header {
 	max-width: 40em;
 	margin: 1em auto;
-    text-align: left;
+    text-align: center;
 	padding: 0;
 }
 body#collection header.multiuser {
     max-width: 100%;
     margin: 1em;
+    text-align: left;
 }
 body#collection header nav:not(.pinned-posts) {
 	display: inline;
@@ -68,7 +69,7 @@ body#collection header nav.tabs a:first-child {
 		{{end}}
 		<header>
 		<h1 dir="{{.Direction}}" id="blog-title"><a href="/{{if .IsTopLevel}}{{else}}{{.Prefix}}{{.Alias}}/{{end}}" class="h-card p-author u-url" rel="me author">{{.DisplayTitle}}</a></h1>
-		{{if .Description}}<p class="description p-note">{{.Description}}</p>{{end}}
+		{{if .Description}}<p class="description p-note">{{.DisplayDescription}}</p>{{end}}
 		{{/*if not .Public/*}}
 			<!--p class="meta-note"><span>Private collection</span>. Only you can see this page.</p-->
 		{{/*end*/}}
@@ -106,7 +107,12 @@ body#collection header nav.tabs a:first-child {
 		<footer>
 			<hr />
 			<nav dir="ltr">
-				{{if not .SingleUser}}<a class="home pubd" href="/">{{.SiteName}}</a> &middot; {{end}}powered by <a style="margin-left:0" href="https://writefreely.org">writefreely</a>
+				<a class="home" href="/">{{.SiteName}}</a>
+				<a href="/about">Пра нас</a>
+				{{if and .LocalTimeline .CanViewReader}}<a href="/read">Стужка</a>{{end}}
+				{{if .Username}}<a href="https://writefreely.org/guide/{{.OfficialVersion}}" target="guide">Інструкцыя для аўтараў</a>{{end}}
+				<a href="/privacy">Палітыка прыватнасці</a>
+				<p style="font-size: 0.9em">Працуе на базе адаптаванай версіі <a href="https://github.com/it-beard/writefreely-vkl">WriteFreely</a></p>
 			</nav>
 		</footer>
 		{{ end }}
@@ -128,7 +134,7 @@ function delPost(e, id, owned) {
 	}
 
 	// TODO: UNDO!
-	if (window.confirm('Are you sure you want to delete this post?')) {
+	if (window.confirm('Вы дакладна жадаеце выдаліць гэты допіс?')) {
 		// AJAX
 		deletePost(id, "", function() {
 			// Remove post from list

@@ -9,7 +9,16 @@
 
 		{{if .PublicStats}}
 			<hr style="margin:1.5em 0;" />
-			<p><em>{{.SiteName}}</em> is home to <strong>{{largeNumFmt .AboutStats.NumPosts}}</strong> {{pluralize "article" "articles" .AboutStats.NumPosts}} across <strong>{{largeNumFmt .AboutStats.NumBlogs}}</strong> {{pluralize "blog" "blogs" .AboutStats.NumBlogs}}.</p>
+			<p>Невялічкая статыстыка сэрвісу <b>{{.SiteName}}</b>:
+				<ul>
+					<li>
+						Колькасць допісаў: <strong>{{largeNumFmt .AboutStats.NumPosts}}</strong>
+					</li>
+					<li>
+						Колькасць блогаў: <strong>{{largeNumFmt .AboutStats.NumBlogs}}</strong>
+					</li>
+				</ul>
+			</p>
 		{{end}}
 
 		{{if not .WFModesty}}

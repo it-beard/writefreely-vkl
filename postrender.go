@@ -115,7 +115,7 @@ func (p *PublicPost) augmentContent() {
 
 func (p *PublicPost) augmentReadingDestination() {
 	if p.IsPaid {
-		p.HTMLContent += template.HTML("\n\n" + `<p><a class="read-more" href="` + p.Collection.CanonicalURL() + p.Slug.String + `">` + localStr("Read more...", p.Language.String) + `</a> ($)</p>`)
+		p.HTMLContent += template.HTML("\n\n" + `<p><a class="read-more" href="` + p.Collection.CanonicalURL() + p.Slug.String + `">Чытаць далей...</a> ($)</p>`)
 	}
 }
 

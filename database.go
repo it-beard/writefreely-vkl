@@ -14,11 +14,12 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
-	"github.com/writeas/web-core/silobridge"
-	wf_db "github.com/writefreely/writefreely/db"
 	"net/http"
 	"strings"
 	"time"
+
+	"github.com/writeas/web-core/silobridge"
+	wf_db "github.com/writefreely/writefreely/db"
 
 	"github.com/guregu/null"
 	"github.com/guregu/null/zero"
@@ -1833,7 +1834,7 @@ func (db *datastore) GetAnonymousPosts(u *User, page int) (*[]PublicPost, error)
 	if page > 0 {
 		limitStr = fmt.Sprintf(" LIMIT %d, %d", start, pagePosts)
 	}
-	rows, err := db.Query("SELECT id, view_count, title, language, created, updated, content FROM posts WHERE owner_id = ? AND collection_id IS NULL ORDER BY created DESC"+limitStr, u.ID)
+	rows, err := db.Query("SELECT id, view_count, title, language, created, updated, content, text_appearance FROM posts WHERE owner_id = ? AND collection_id IS NULL ORDER BY created DESC"+limitStr, u.ID)
 	if err != nil {
 		log.Error("Failed selecting from posts: %v", err)
 		return nil, impart.HTTPError{http.StatusInternalServerError, "Couldn't retrieve user anonymous posts."}
@@ -1843,7 +1844,7 @@ func (db *datastore) GetAnonymousPosts(u *User, page int) (*[]PublicPost, error)
 	posts := []PublicPost{}
 	for rows.Next() {
 		p := Post{}
-		err = rows.Scan(&p.ID, &p.ViewCount, &p.Title, &p.Language, &p.Created, &p.Updated, &p.Content)
+		err = rows.Scan(&p.ID, &p.ViewCount, &p.Title, &p.Language, &p.Created, &p.Updated, &p.Content, &p.Font)
 		if err != nil {
 			log.Error("Failed scanning row: %v", err)
 			break

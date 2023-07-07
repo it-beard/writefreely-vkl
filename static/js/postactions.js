@@ -17,7 +17,7 @@ var postActions = function() {
 			if (code == 200) {
 				for (var i=0; i<resp.data.length; i++) {
 					if (resp.data[i].code == 200) {
-						$lbl.innerHTML = "moved to <strong>"+lbl+"</strong>";
+						$lbl.innerHTML = "аперацыя \"<strong>"+lbl+"</strong>\" выканана паспяхова.";
 						var pre = "/"+collAlias;
 						if (typeof singleUser !== 'undefined' && singleUser) {
 							pre = "";
@@ -35,7 +35,7 @@ var postActions = function() {
 								if (typeof singleUser !== 'undefined' && singleUser) {
 									draftPre = "d/";
 								}
-								$article.innerHTML = '<p><a href="/'+draftPre+resp.data[i].post.id+'">Unpublished post</a>.</p>';
+								$article.innerHTML = '<p><a href="/'+draftPre+resp.data[i].post.id+'">Допіс у чарнавіке</a>.</p>';
 							} else {
 								$article.innerHTML = '<p>Moved to <a style="font-weight:bold" href="'+newPostURL+'">'+lbl+'</a>.</p>';
 							}
@@ -75,7 +75,7 @@ var postActions = function() {
 			if (code == 200) {
 				for (var i=0; i<resp.data.length; i++) {
 					if (resp.data[i].code == 200) {
-						el.innerHTML = "moved to <strong>"+lbl+"</strong>";
+						el.innerHTML = "аперацыя \"<strong>"+lbl+"</strong>\" выканана пасяпяхова.";
 						el.onclick = null;
 						var pre = "/"+collAlias;
 						if (typeof singleUser !== 'undefined' && singleUser) {
@@ -96,7 +96,7 @@ var postActions = function() {
 								if (typeof singleUser !== 'undefined' && singleUser) {
 									draftPre = "d/";
 								}
-								$article.innerHTML = '<p><a href="/'+draftPre+resp.data[i].post.id+'">Unpublished post</a>.</p>';
+								$article.innerHTML = '<p><a href="/'+draftPre+resp.data[i].post.id+'">Допіс у чарнавіке</a>.</p>';
 							} else {
 								$article.innerHTML = '<p>Moved to <a style="font-weight:bold" href="'+newPostURL+'">'+lbl+'</a>.</p>';
 							}

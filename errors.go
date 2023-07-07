@@ -47,13 +47,13 @@ var (
 	ErrPostUnpublished        = impart.HTTPError{Status: http.StatusGone, Message: "Post unpublished by author."}
 	ErrPostFetchError         = impart.HTTPError{Status: http.StatusInternalServerError, Message: "We encountered an error getting the post. The humans have been alerted."}
 
-	ErrUserNotFound       = impart.HTTPError{http.StatusNotFound, "User doesn't exist."}
+	ErrUserNotFound       = impart.HTTPError{http.StatusNotFound, "Карыстальнік не знойдзены."}
 	ErrRemoteUserNotFound = impart.HTTPError{http.StatusNotFound, "Remote user not found."}
-	ErrUserNotFoundEmail  = impart.HTTPError{http.StatusNotFound, "Please enter your username instead of your email address."}
+	ErrUserNotFoundEmail  = impart.HTTPError{http.StatusNotFound, "Каліласка, увядзіце імя карыстальніка, а не email."}
 
-	ErrUserSilenced = impart.HTTPError{http.StatusForbidden, "Account is silenced."}
+	ErrUserSilenced = impart.HTTPError{http.StatusForbidden, "Уліковы запіс замоўчаны."}
 
-	ErrDisabledPasswordAuth = impart.HTTPError{http.StatusForbidden, "Password authentication is disabled."}
+	ErrDisabledPasswordAuth = impart.HTTPError{http.StatusForbidden, "Уваход праз пароль адключаны."}
 )
 
 // Post operation errors

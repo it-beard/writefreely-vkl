@@ -14,7 +14,7 @@ function canInsert(state, nodeType, attrs) {
 }
 
 const ReadMoreItem = new MenuItem({
-  label: "Read more",
+  label: "Чытаць далей",
   select: (state) => canInsert(state, writeFreelySchema.nodes.readmore),
   run(state, dispatch) {
     dispatch(

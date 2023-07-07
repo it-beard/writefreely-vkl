@@ -41,7 +41,7 @@ function delPost(e, id, owned) {
 	}
 
 	// TODO: UNDO!
-	if (window.confirm('Are you sure you want to delete this post?')) {
+	if (window.confirm('Вы дакладна жадаеце выдаліць гэты допіс?')) {
 		var token;
 		for (var i=0; i<posts.length; i++) {
 			if (posts[i].id == id) {
@@ -142,7 +142,7 @@ var localPosts = function() {
 	};
 	var DeletePostLocal = function(e, el, id) {
 		e.preventDefault();
-		if (!window.confirm('Are you sure you want to delete this post?')) {
+		if (!window.confirm('Вы дакладна жадаеце выдаліць гэты допіс?')) {
 			return;
 		}
 		var i = findPostIdx(id);

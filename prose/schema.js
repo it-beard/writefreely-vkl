@@ -11,7 +11,7 @@ export const writeFreelySchema = new Schema({
       toDOM: (node) => [
         "div",
         { class: "editorreadmore" },
-        "Read more...",
+        "Чытаць далей...",
       ],
       parseDOM: [{ tag: "div.editorreadmore" }],
     }),

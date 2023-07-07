@@ -28,7 +28,6 @@ import (
 	"github.com/microcosm-cc/bluemonday"
 	stripmd "github.com/writeas/go-strip-markdown/v2"
 	"github.com/writeas/impart"
-	"github.com/writeas/monday"
 	"github.com/writeas/slug"
 	"github.com/writeas/web-core/activitystreams"
 	"github.com/writeas/web-core/bots"
@@ -516,8 +515,10 @@ func handleViewPost(app *App, w http.ResponseWriter, r *http.Request) error {
 // newPost creates a new post with or without an owning Collection.
 //
 // Endpoints:
-//   /posts
-//   /posts?collection={alias}
+//
+//	/posts
+//	/posts?collection={alias}
+//
 // ? /collections/{alias}/posts
 func newPost(app *App, w http.ResponseWriter, r *http.Request) error {
 	reqJSON := IsJSON(r)
@@ -1150,9 +1151,7 @@ func fetchPostProperty(app *App, w http.ResponseWriter, r *http.Request) error {
 func (p *Post) processPost() PublicPost {
 	res := &PublicPost{Post: p, Views: 0}
 	res.Views = p.ViewCount
-	// TODO: move to own function
-	loc := monday.FuzzyLocale(p.Language.String)
-	res.DisplayDate = monday.Format(p.Created, monday.LongFormatsByLocale[loc], loc)
+	res.DisplayDate = DateFormatBlrPosts(p.Created)
 
 	return *res
 }
@@ -1471,7 +1470,7 @@ func viewCollectionPost(app *App, w http.ResponseWriter, r *http.Request) error 
 				Font:     "norm",
 				Language: zero.NewString("en", true),
 				RTL:      zero.NewBool(false, true),
-				Content: `<p class="msg">This page is missing.</p>
+				Content: `<p class="msg">Старонка не знойдзена.</p>
 
 Are you sure it was ever here?`,
 			}

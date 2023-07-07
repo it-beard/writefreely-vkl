@@ -1,4 +1,9 @@
 {{define "user-navigation"}}
+	<style>
+		.left-side h1 a {
+			font-family: Lora,'Palatino Linotype','Book Antiqua','New York','DejaVu serif',serif !important;
+		}
+	</style>
 	<header class="{{if .SingleUser}}singleuser{{else}}multiuser{{end}}">
 		<nav id="full-nav">
 		{{if .SingleUser}}
@@ -6,69 +11,73 @@
 				<nav class="dropdown-nav">
 					<ul><li><a href="/" title="View blog" class="title">{{.SiteName}}</a> <img class="ic-18dp" src="/img/ic_down_arrow_dark@2x.png" />
 						<ul>
-							{{if .IsAdmin}}<li><a href="/admin">Admin dashboard</a></li>{{end}}
-							<li><a href="/me/settings">Account settings</a></li>
-							<li><a href="/me/import">Import posts</a></li>
-							<li><a href="/me/export">Export</a></li>
+							{{if .IsAdmin}}<li><a href="/admin">Налады сервера</a></li>{{end}}
+							<li><a href="/me/settings">Налады акаўнта</a></li>
+							<li><a href="/me/import">Імпарт допісаў</a></li>
+							<li><a href="/me/export">Экспарт</a></li>
 							<li class="separator"><hr /></li>
-							<li><a href="/me/logout">Log out</a></li>
+							<li><a href="/me/logout">Выйсці</a></li>
 						</ul></li>
 					</ul>
 				</nav>
 				<nav class="tabs">
-					<a href="/me/c/{{.Username}}" {{if and (hasPrefix .Path "/me/c/") (hasSuffix .Path .Username)}}class="selected"{{end}}>Customize</a>
-					<a href="/me/c/{{.Username}}/stats" {{if hasSuffix .Path "/stats"}}class="selected"{{end}}>Stats</a>
-					<a href="/me/posts/"{{if eq .Path "/me/posts/"}} class="selected"{{end}}>Drafts</a>
+					<a href="/me/c/{{.Username}}" {{if and (hasPrefix .Path "/me/c/") (hasSuffix .Path .Username)}}class="selected"{{end}}>Наладзіць</a>
+					<a href="/me/c/{{.Username}}/stats" {{if hasSuffix .Path "/stats"}}class="selected"{{end}}>Статыстыка</a>
+					<a href="/me/posts/"{{if eq .Path "/me/posts/"}} class="selected"{{end}}>Чарнавікі</a>
 				</nav>
 			</nav>
 			<div class="right-side">
-				<a class="simple-btn" href="/me/new">New Post</a>
+				<a class="simple-btn" href="/me/new">Новы Допіс</a>
 			</div>
 		{{else}}
 			<div class="left-side">
-				<h1><a href="/" title="Return to editor">{{.SiteName}}</a></h1>
+				<h1><a href="/">{{.SiteName}}</a></h1>
 			</div>
 			<nav id="user-nav">
 				{{if .Username}}
 				<nav class="dropdown-nav">
 					<ul><li class="has-submenu"><a>{{.Username}}</a> <img class="ic-18dp" src="/img/ic_down_arrow_dark@2x.png" /><ul>
-							{{if .IsAdmin}}<li><a href="/admin">Admin dashboard</a></li>{{end}}
-							<li><a href="/me/settings">Account settings</a></li>
-							<li><a href="/me/import">Import posts</a></li>
-							<li><a href="/me/export">Export</a></li>
-							{{if .CanInvite}}<li><a href="/me/invites">Invite people</a></li>{{end}}
+							{{if .IsAdmin}}<li><a href="/admin">Налады сервера</a></li>{{end}}
+							<li><a href="/me/settings">Налады акаўнта</a></li>
+							<li><a href="/me/import">Імпарт допісаў</a></li>
+							<li><a href="/me/export">Экспарт</a></li>
+							{{if .CanInvite}}<li><a href="/me/invites">Запрасіць людзей</a></li>{{end}}
 							<li class="separator"><hr /></li>
-							<li><a href="/me/logout">Log out</a></li>
+							<li><a href="/me/logout">Выйсці</a></li>
 						</ul></li>
 					</ul>
 				</nav>
 				{{end}}
 				<nav class="tabs">
-					{{if .SimpleNav}}
-						{{ if not .SingleUser }}
-						{{if and (and .LocalTimeline .CanViewReader) .Chorus}}<a href="/"{{if eq .Path "/"}} class="selected"{{end}}>Home</a>{{end}}
+					{{if not .SimpleNav}}
+						{{ if not .Chorus}}
+							{{ if not .SingleUser }}
+							{{if and (and .LocalTimeline .CanViewReader) .Chorus}}<a href="/"{{if eq .Path "/"}} class="selected"{{end}}>Галоўная</a>{{end}}
+							{{ end }}
 						{{ end }}
-						<a href="/about">About</a>
+						<a href="/about">Пра нас</a>
 						{{ if not .SingleUser }}
 							{{ if .Username }}
-						{{if gt .MaxBlogs 1}}<a href="/me/c/"{{if eq .Path "/me/c/"}} class="selected"{{end}}>Blogs</a>{{end}}
-						{{if and .Chorus (eq .MaxBlogs 1)}}<a href="/{{.Username}}/"{{if eq .Path (printf "/%s/" .Username)}} class="selected"{{end}}>My Posts</a>{{end}}
-						{{if not .DisableDrafts}}<a href="/me/posts/"{{if eq .Path "/me/posts/"}} class="selected"{{end}}>Drafts</a>{{end}}
+						{{if gt .MaxBlogs 1}}<a href="/me/c/"{{if eq .Path "/me/c/"}} class="selected"{{end}}>Мае блогі</a>{{end}}
+						{{if and .Chorus (eq .MaxBlogs 1)}}<a href="/{{.Username}}/"{{if eq .Path (printf "/%s/" .Username)}} class="selected"{{end}}>Мае допісы</a>{{end}}
+						{{if not .DisableDrafts}}<a href="/me/posts/"{{if eq .Path "/me/posts/"}} class="selected"{{end}}>Чарнавікі</a>{{end}}
 							{{ end }}
-						{{if and (and .LocalTimeline .CanViewReader) (not .Chorus)}}<a href="/read">Reader</a>{{end}}
-						{{if and (and (and .Chorus .OpenRegistration) (not .Username)) (or (not .Private) (ne .Landing ""))}}<a href="/signup"{{if eq .Path "/signup"}} class="selected"{{end}}>Sign up</a>{{end}}
-						{{if .Username}}<a href="/me/logout">Log out</a>{{else}}<a href="/login">Log in</a>{{end}}
+						{{if and (and .LocalTimeline .CanViewReader) (not .Chorus)}}<a href="/read">Стужка</a>{{end}}
+						{{if and (and (and .Chorus .OpenRegistration) (not .Username)) (or (not .Private) (ne .Landing ""))}}<a href="/signup"{{if eq .Path "/signup"}} class="selected"{{end}}>Зарэгістравацца</a>{{end}}
+						{{if .Username}}{{else}}<a href="/login">Увайсці</a>{{end}}
 						{{ end }}
 					{{else}}
-						<a href="/me/c/"{{if eq .Path "/me/c/"}} class="selected"{{end}}>Blogs</a>
-						{{if not .DisableDrafts}}<a href="/me/posts/"{{if eq .Path "/me/posts/"}} class="selected"{{end}}>Drafts</a>{{end}}
-						{{if and (and .LocalTimeline .CanViewReader) (not .Chorus)}}<a href="/read">Reader</a>{{end}}
+					    <a href="/about"{{if eq .Path "/about"}} class="selected"{{end}}>Пра нас</a>
+						<a href="/me/c/"{{if eq .Path "/me/c/"}} class="selected"{{end}}>Мае блогі</a>
+						{{if not .DisableDrafts}}<a href="/me/posts/"{{if eq .Path "/me/posts/"}} class="selected"{{end}}>Чарнавікі3</a>{{end}}
+						{{if and (and .LocalTimeline .CanViewReader) (not .Chorus)}}<a href="/read">Стужка</a>{{end}}
 					{{end}}
 				</nav>
 			</nav>
 			{{if .Username}}
 				<div class="right-side">
-					<a class="simple-btn" href="/{{if .CollAlias}}#{{.CollAlias}}{{end}}">New Post</a>
+					<!--<a class="simple-btn" href="/{{if .CollAlias}}#{{.CollAlias}}{{end}}">Новы Допіс</a> -->
+					<a class="simple-btn" href="/new">Новы Допіс</a>
 				</div>
 			{{end}}
 		{{end}}
@@ -99,17 +108,17 @@
 
 {{define "admin-header"}}
 <header class="admin">
-	<h1>Admin</h1>
+	<h1>Адмін</h1>
 	<nav id="admin" class="pager">
-		<a href="/admin" {{if eq .Path "/admin"}}class="selected"{{end}}>Dashboard</a>
-		<a href="/admin/settings" {{if eq .Path "/admin/settings"}}class="selected"{{end}}>Settings</a>
+		<a href="/admin" {{if eq .Path "/admin"}}class="selected"{{end}}>Дашборд</a>
+		<a href="/admin/settings" {{if eq .Path "/admin/settings"}}class="selected"{{end}}>Налады</a>
 		{{if not .SingleUser}}
-		<a href="/admin/users" {{if eq .Path "/admin/users"}}class="selected"{{end}}>Users</a>
-		<a href="/admin/pages" {{if eq .Path "/admin/pages"}}class="selected"{{end}}>Pages</a>
-		{{if .UpdateChecks}}<a href="/admin/updates" {{if eq .Path "/admin/updates"}}class="selected"{{end}}>Updates{{if .UpdateAvailable}}<span class="blip">!</span>{{end}}</a>{{end}}
+		<a href="/admin/users" {{if eq .Path "/admin/users"}}class="selected"{{end}}>Карыстальнікі</a>
+		<a href="/admin/pages" {{if eq .Path "/admin/pages"}}class="selected"{{end}}>Старонкі</a>
+		{{if .UpdateChecks}}<a href="/admin/updates" {{if eq .Path "/admin/updates"}}class="selected"{{end}}>Абноўленні{{if .UpdateAvailable}}<span class="blip">!</span>{{end}}</a>{{end}}
 		{{end}}
 		{{if not .Forest}}
-		<a href="/admin/monitor" {{if eq .Path "/admin/monitor"}}class="selected"{{end}}>Monitor</a>
+		<a href="/admin/monitor" {{if eq .Path "/admin/monitor"}}class="selected"{{end}}>Маніторынг</a>
 		{{end}}
 	</nav>
 </header>

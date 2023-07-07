@@ -306,6 +306,26 @@ func handleViewLanding(app *App, w http.ResponseWriter, r *http.Request) error {
 	return renderPage(w, "landing.tmpl", p)
 }
 
+func DateFormatBlrLong(t time.Time) string {
+	return fmt.Sprintf("%d %s %d",
+		t.Day(), monthsBlr[t.Month()], t.Year(),
+	)
+}
+
+func DateFormatBlrPosts(t time.Time) string {
+	return fmt.Sprintf("%d %s %d у %02d:%02d",
+		t.Day(), monthsBlr[t.Month()], t.Year(), t.Hour(), t.Minute(),
+	)
+}
+
+var daysBlr = [...]string{
+	"Нядзеля", "Панядзелак", "Аўторак", "Серада", "Чацвер", "Пятніца", "Субота"}
+
+var monthsBlr = [...]string{
+	"Студзеня", "Лютага", "Сакавіка", "Красавіка", "Траўня", "Чэрвеня",
+	"Ліпеня", "Жніўня", "Верасня", "Кастрычніка", "Лістапада", "Снежня",
+}
+
 func handleTemplatedPage(app *App, w http.ResponseWriter, r *http.Request, t *template.Template) error {
 	p := struct {
 		page.StaticPage
@@ -340,7 +360,7 @@ func handleTemplatedPage(app *App, w http.ResponseWriter, r *http.Request, t *te
 		p.Content = template.HTML(applyMarkdown([]byte(c.Content), "", app.cfg))
 		p.PlainContent = shortPostDescription(stripmd.Strip(c.Content))
 		if !c.Updated.IsZero() {
-			p.Updated = c.Updated.Format("January 2, 2006")
+			p.Updated = DateFormatBlrLong(c.Updated)
 		}
 	}
 

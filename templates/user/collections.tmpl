@@ -10,7 +10,7 @@
 {{if .Silenced}}
 	{{template "user-silenced"}}
 {{end}}
-<h1>Blogs</h1>
+<h1>Мае блогі</h1>
 <ul class="atoms collections">
 	{{range $i, $el := .Collections}}<li class="collection">
 		<div class="row lineitem">
@@ -20,7 +20,7 @@
 					<span class="electron" {{if .IsPrivate}}style="font-style: italic"{{end}}>{{if .IsPrivate}}private{{else}}{{.DisplayCanonicalURL}}{{end}}</span>
 				</h3>
 				{{template "collection-nav" (dict "Alias" .Alias "Path" $.Path "SingleUser" $.SingleUser "CanPost" true	)}}
-				{{if .Description}}<p class="description">{{.Description}}</p>{{end}}
+				{{if .Description}}<p class="description">{{.DisplayDescription}}</p>{{end}}
 			</div>
 		</div>
 	</li>{{end}}
@@ -28,15 +28,15 @@
 		{{if not .NewBlogsDisabled}}
 		<form method="POST" action="/api/collections" id="new-collection-form" onsubmit="return createCollection()">
 			<h4>
-				<input type="text" name="title" placeholder="Blog name" id="blog-name">
+				<input type="text" name="title" placeholder="Назва блога" id="blog-name">
 				<input type="hidden" name="web" value="true" />
-				<input type="submit" value="Create" id="create-collection-btn">
+				<input type="submit" value="Стварыць" id="create-collection-btn">
 			</h4>
 		</form>
 		{{end}}
 	</li>
 </ul>
-{{if not .NewBlogsDisabled}}<p style="margin-top:0"><a id="new-collection" href="#new-collection">New blog</a></p>{{end}}
+{{if not .NewBlogsDisabled}}<p style="margin-top:0"><a id="new-collection" href="#new-collection">Новы блог</a></p>{{end}}
 
 </div>
 
@@ -81,7 +81,7 @@ function createCollection() {
 					url.innerText = data.error_msg;
 					$createColl.appendChild(url);
 				} else {
-					$err.innerText = "This name is taken.";
+					$err.innerText = "Імя ўжо занята.";
 				}
 			}
 		}
@@ -94,20 +94,20 @@ function createCollection() {
 		var collForm = He.get('create-collection');
 		if (collForm.style.display == '' || collForm.style.display == 'none') {
 			// Show form
-			this.textContent = "Cancel";
+			this.textContent = "Адмяніць";
 			collForm.style.display = 'list-item';
 			collForm.querySelector('input[type=text]').focus();
 			return;
 		}
 		// Hide form
-		this.textContent = "New blog";
+		this.textContent = "Новы блог";
 		collForm.style.display = 'none';
 	});
 	if (location.hash == '#new-collection' || location.hash == '#new') {
 		var collForm = He.get('create-collection');
 		collForm.style.display = 'list-item';
 		collForm.querySelector('input[type=text]').focus();
-		He.get('new-collection').textContent = "Cancel";
+		He.get('new-collection').textContent = "Адмяніць";
 	}
 }());
 </script>

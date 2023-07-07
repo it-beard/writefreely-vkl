@@ -1,4 +1,4 @@
-{{define "head"}}<title>{{.SiteName}} Reader</title>
+{{define "head"}}<title>Стужка - {{.SiteName}}</title>
 		
 		<link rel="alternate" type="application/rss+xml" title="{{.SiteName}} Reader" href="/read/feed/" />
 		{{if gt .CurrentPage 1}}<link rel="prev" href="{{.PrevPageURL .CurrentPage}}">{{end}}
@@ -26,9 +26,16 @@
 			font-size: 1.1em;
 			color: #777;
 		}
+
 		#wrapper {
 			font-size: 1.2em;
 		}
+
+		#wrapper div,
+		#wrapper a  {
+			font-family: 'Roboto',sans-serif !important;
+		}
+
 		.preview {
 			max-height: 180px;
 			overflow: hidden;
@@ -46,11 +53,46 @@
 			background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
 		}
-		p.source {
-			font-size: 0.86em;
-			margin-top: 0.25em;
-			margin-bottom: 0;
+
+		article {
+			border-bottom: 1.5px solid #f7f4f4;
+			padding: 0.9em 1.5em 2em 1.5em !important;
+			margin-bottom: 2em !important;
 		}
+
+		article:last-child {
+			border-bottom: none;
+			margin-bottom: 0em !important;
+			padding-bottom: 0 !important;
+		}
+
+		article p.source {
+			font-size: 0.86em;
+			font-weight: bold;
+			margin-bottom: 0;
+			display: inline;
+		}
+
+		article p.source-one-line {
+			margin-bottom: 0;
+			display: inline !important;
+			font-size: 0.86em;
+			font-weight: bold;
+		}
+
+		div.dt-published-header {
+			text-transform: lowercase;
+		}
+
+		div.dt-published {
+			display: inline;
+			text-transform: lowercase;
+			color: #8b8b8b;
+			font-size: 0.86em;
+			font-weight: bold;
+			border-radius: 3px;
+		}
+
 		.attention-box {
 			text-align: center;
 			font-size: 1.1em;
@@ -78,6 +120,34 @@
 		body#collection article {
 			max-width: 40em !important;
 		}
+
+		a.read-more {
+			background-color: #c90202;
+			color: white !important;
+			padding: 5px 10px;
+			display: inline-block;
+			border-radius: 5px;
+			font-size: 0.9em;
+			font-weight: bold;
+			margin-top: 10px;
+		}
+
+		a.read-more:hover {
+			background-color: #700101;
+			text-decoration: none;
+		}
+
+		.delimiter {
+			color: #a4a1a1;
+			font-size: 0.7em;
+			font-weight: bold;
+			padding: 0 0.4em;
+			display: inline-block;
+		}
+
+		h2.post-title {
+			margin-bottom: .50em !important;
+		}
 		</style>
 {{end}}
 {{define "body-attrs"}}id="collection"{{end}}
@@ -95,30 +165,40 @@
 					{{- if .IsPaid}}{{template "paid-badge" .}}{{end -}}
 					<a href="{{if .Slug.String}}{{.Collection.CanonicalURL}}{{.Slug.String}}{{else}}{{.CanonicalURL .Host}}.md{{end}}" itemprop="url" class="u-url">{{.PlainDisplayTitle}}</a>
 				</h2>
-				<time class="dt-published" datetime="{{.Created8601}}" pubdate itemprop="datePublished" content="{{.Created}}">{{if not .Title.String}}<a href="{{.Collection.CanonicalURL}}{{.Slug.String}}" itemprop="url">{{end}}{{.DisplayDate}}{{if not .Title.String}}</a>{{end}}</time>
+				<div class="dt-published">
+					{{if not .Title.String}}<a href="{{.Collection.CanonicalURL}}{{.Slug.String}}" itemprop="url">{{end}}
+						{{.DisplayDate}}
+					{{if not .Title.String}}</a>{{end}}
+				</div>
+				<span class="delimiter"> | </span>
+				<p class="source-one-line">{{if .Collection}}<a href="{{.Collection.CanonicalURL}}">{{.Collection.DisplayTitle}}</a>{{else}}<em>Ананіма</em>{{end}}</p>
 			{{- else -}}
 				<h2 class="post-title" itemprop="name">
 					{{- if .IsPaid}}{{template "paid-badge" .}}{{end -}}
-					<time class="dt-published" datetime="{{.Created8601}}" pubdate itemprop="datePublished" content="{{.Created}}"><a href="{{if .Collection}}{{.Collection.CanonicalURL}}{{.Slug.String}}{{else}}{{.CanonicalURL .Host}}.md{{end}}" itemprop="url" class="u-url">{{.DisplayDate}}</a></time>
+					<div class="dt-published-header">
+						<a href="{{if .Collection}}{{.Collection.CanonicalURL}}{{.Slug.String}}{{else}}{{.CanonicalURL .Host}}.md{{end}}" itemprop="url" class="u-url">
+							{{.DisplayDate}}
+						</a>
+					</div>
 				</h2>
+				<p class="source">{{if .Collection}}<a href="{{.Collection.CanonicalURL}}">{{.Collection.DisplayTitle}}</a>{{else}}<em>Ананіма</em>{{end}}</p>
 			{{- end}}
-			<p class="source">{{if .Collection}}from <a href="{{.Collection.CanonicalURL}}">{{.Collection.DisplayTitle}}</a>{{else}}<em>Anonymous</em>{{end}}</p>
 			{{if .Excerpt}}<div class="p-summary" {{if .Language}}lang="{{.Language.String}}"{{end}} dir="{{.Direction}}">{{.Excerpt}}</div>
 		
-			<a class="read-more" href="{{if .Collection}}{{.Collection.CanonicalURL}}{{.Slug.String}}{{else}}{{.CanonicalURL .Host}}.md{{end}}">{{localstr "Read more..." .Language.String}}</a>{{else}}<div class="e-content preview" {{if .Language}}lang="{{.Language.String}}"{{end}} dir="{{.Direction}}">{{ if not .HTMLContent }}<p id="post-body" class="e-content preview">{{.Content}}</p>{{ else }}{{.HTMLContent}}{{ end }}<div class="over">&nbsp;</div></div>
+			<a class="read-more" href="{{if .Collection}}{{.Collection.CanonicalURL}}{{.Slug.String}}{{else}}{{.CanonicalURL .Host}}.md{{end}}">Чытаць далей...</a>{{else}}<div class="e-content preview" {{if .Language}}lang="{{.Language.String}}"{{end}} dir="{{.Direction}}">{{ if not .HTMLContent }}<p id="post-body" class="e-content preview">{{.Content}}</p>{{ else }}{{.HTMLContent}}{{ end }}<div class="over">&nbsp;</div></div>
 			
-			<a class="read-more maybe" href="{{if .Collection}}{{.Collection.CanonicalURL}}{{.Slug.String}}{{else}}{{.CanonicalURL .Host}}.md{{end}}">{{localstr "Read more..." .Language.String}}</a>{{end}}</article>
+			<a class="read-more maybe" href="{{if .Collection}}{{.Collection.CanonicalURL}}{{.Slug.String}}{{else}}{{.CanonicalURL .Host}}.md{{end}}">Чытаць далей...</a>{{end}}</article>
 			{{end}}
 		</section>
 		{{ else }}
 		<div class="attention-box">
-			<p>No posts here yet!</p>
+			<p>Пакуль допісаў няма.</p>
 		</div>
 		{{ end }}
 
 		{{if gt .TotalPages 1}}<nav id="paging" class="content-container clearfix">
-			{{if lt .CurrentPage .TotalPages}}<a href="{{.NextPageURL .CurrentPage}}">&#8672; Older</a>{{end}}
-			{{if gt .CurrentPage 1}}<a style="float:right;" href="{{.PrevPageURL .CurrentPage}}">Newer &#8674;</a>{{end}}
+			{{if lt .CurrentPage .TotalPages}}<a href="{{.NextPageURL .CurrentPage}}">&#8672; Старыя</a>{{end}}
+			{{if gt .CurrentPage 1}}<a style="float:right;" href="{{.PrevPageURL .CurrentPage}}">Новыя &#8674;</a>{{end}}
 		</nav>{{end}}
 
 		</div>

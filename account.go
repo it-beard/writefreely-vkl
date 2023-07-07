@@ -455,16 +455,16 @@ func login(app *App, w http.ResponseWriter, r *http.Request) error {
 
 		// Validate required params (all)
 		if signin.Alias == "" {
-			msg := "Parameter `alias` required."
+			msg := "Патрэбна ўвесці імя карыстальніка."
 			if signin.Web {
-				msg = "A username is required."
+				msg = "Патрэбна ўвесці імя карыстальніка."
 			}
 			return impart.HTTPError{http.StatusBadRequest, msg}
 		}
 		if !signin.EmailLogin && signin.Pass == "" {
-			msg := "Parameter `pass` required."
+			msg := "Патрэбна ўвесці пароль."
 			if signin.Web {
-				msg = "A password is required."
+				msg = "Патрэбна ўвесці пароль."
 			}
 			return impart.HTTPError{http.StatusBadRequest, msg}
 		}
