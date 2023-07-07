@@ -27,10 +27,6 @@
 			color: #777;
 		}
 
-		#wrapper {
-			font-size: 1.2em;
-		}
-
 		#wrapper div,
 		#wrapper a  {
 			font-family: 'Roboto',sans-serif !important;
@@ -72,8 +68,6 @@
 		}
 
 		article p.source {
-			font-size: 0.86em;
-			font-weight: bold;
 			margin-bottom: 0;
 			display: inline;
 		}
@@ -81,8 +75,6 @@
 		article p.source-one-line {
 			margin-bottom: 0;
 			display: inline !important;
-			font-size: 0.86em;
-			font-weight: bold;
 		}
 
 		div.dt-published-header {
@@ -93,8 +85,6 @@
 			display: inline;
 			text-transform: lowercase;
 			color: #8b8b8b;
-			font-size: 0.86em;
-			font-weight: bold;
 			border-radius: 3px;
 		}
 
@@ -120,28 +110,9 @@
 			max-width: 40em !important;
 		}
 
-		a.read-more {
-			background-color: #c90202d1;
-			color: white !important;
-			padding: 5px 10px;
-			display: inline-block;
-			border-radius: 5px;
-			font-size: 0.9em;
-			font-weight: bold;
-			margin-top: 20px;
-		}
-
-		a.read-more:hover {
-			background-color: #700101;
-			text-decoration: none;
-			transition: 0.3s;
-		}
-
 		.delimiter {
 			color: #a4a1a1;
-			font-size: 0.7em;
-			font-weight: bold;
-			padding: 0 0.4em;
+			padding: 0 0.2em;
 			display: inline-block;
 		}
 
@@ -170,7 +141,7 @@
 						{{.DisplayDate}}
 					{{if not .Title.String}}</a>{{end}}
 				</div>
-				<span class="delimiter"> | </span>
+				<span class="delimiter"> ~ </span>
 				<p class="source-one-line">{{if .Collection}}<a href="{{.Collection.CanonicalURL}}">{{.Collection.DisplayTitle}}</a>{{else}}<em>Ананіма</em>{{end}}</p>
 			{{- else -}}
 				<h2 class="post-title" itemprop="name">

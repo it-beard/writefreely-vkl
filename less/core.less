@@ -1,5 +1,5 @@
 body {
-	font-family: @roboto;
+	font-family: @robotoFont;
 	font-size-adjust: 0.5;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
@@ -200,7 +200,7 @@ body {
 			top: 1em;
 			left: 1.5em;
 			li a.write {
-				font-family: @roboto;
+				font-family: @robotoFont;
 				padding-top: 0.2em;
 				padding-bottom: 0.2em;
 			}
@@ -263,8 +263,22 @@ body {
 			overflow: visible;
 			padding: 1em 6em 0;
 		}
+		
 		a.read-more {
-			color: #666;
+			background-color: #c90202d1;
+			color: white !important;
+			padding: 5px 10px;
+			display: inline-block;
+			border-radius: 5px;
+			font-weight: bold;
+			margin-top: 20px;
+			font-family: @robotoFont;
+		}
+
+		a.read-more:hover {
+			background-color: #700101;
+			text-decoration: none;
+			transition: 0.3s;
 		}
 	}
 
@@ -338,7 +352,7 @@ body {
 		top: 1.5em;
 		right: 1.5em;
 		font-size: 0.95rem;
-		font-family: @roboto;
+		font-family: @robotoFont;
 		text-transform: uppercase;
 		a {
 			color: #777;
@@ -416,7 +430,7 @@ nav#full-nav {
 }
 
 nav#full-nav a.simple-btn, .tool button {
-	font-family: @roboto;
+	font-family: @robotoFont;
 	border: 1px solid #ccc !important;
 	padding: .5rem 1rem;
 	margin: 0;
@@ -473,7 +487,7 @@ a {
 		}
 	}
 	&.action-btn {
-		font-family: @roboto;
+		font-family: @robotoFont;
 		text-transform: uppercase;
 		.rounded(.25em);
 		background-color: red;
@@ -511,10 +525,6 @@ body#collection article p, body#subpage article p {
 	.article-p;
 }
 
-body section#wrapper article {
-	font-size: 1.2em;
-}
-
 pre, body#post article, #post .alert, #subpage .alert, body#collection article, body#subpage article, body#subpage #wrapper h1 {
 	max-width: 40rem;
 	margin: 0 auto;
@@ -544,7 +554,7 @@ textarea, input#title, pre, body#post article, body#collection article, body#sub
 		font-family: @sansFont;
 	}
 	&.robo {
-		font-family: @roboto;
+		font-family: @robotoFont;
 	}
 	&.mono, &.wrap, &.code {
 		font-family: @monoFont;
@@ -619,7 +629,7 @@ table.classy {
 		text-transform: uppercase;
 		font-weight: normal;
 		font-size: 95%;
-		font-family: @roboto;
+		font-family: @robotoFont;
 		padding: 1rem 0.75rem;
 		text-align: center;
 	}
@@ -706,7 +716,7 @@ select.inputform, textarea.inputform {
 
 input, button, select.inputform, textarea.inputform, a.btn {
 	padding: 0.5em;
-	font-family: @roboto;
+	font-family: @robotoFont;
 	font-size: 100%;
 	.rounded(.25em);
 	&[type=submit], &.submit, &.cta {
@@ -751,7 +761,7 @@ input, button, select.inputform, textarea.inputform, a.btn {
 	font-size: .86em;
 	padding: .5em 1em;
 	white-space: nowrap;
-	font-family: @roboto;
+	font-family: @robotoFont;
 	&:hover {
 		text-decoration: none;
 		background: @lightNavBorder;
@@ -1093,7 +1103,7 @@ li {
 		}
 	}
 	p.dismiss {
-		font-family: @roboto;
+		font-family: @robotoFont;
 		text-align: right;
 		font-size: 0.86em;
 		text-transform: uppercase;
@@ -1202,7 +1212,7 @@ h2 {
 .action {
 	font-size: 0.7em;
 	font-weight: normal;
-	font-family: @roboto;
+	font-family: @robotoFont;
 
 	&+ .action {
 		margin-left: 0.5em;
@@ -1249,7 +1259,7 @@ header {
 			}
 			a {
 				font-size: 1em;
-				font-family: @roboto;
+				font-family: @robotoFont;
 				span {
 					font-size: 0.7em;
 					color: #999;
@@ -1259,7 +1269,7 @@ header {
 				}
 				&.title {
 					font-size: 1.6em;
-					font-family: @roboto;
+					font-family: @robotoFont;
 					font-weight: bold;
 				}
 			}
@@ -1604,7 +1614,7 @@ pre.code-block {
 }
 
 #org-nav {
-	font-family: @roboto;
+	font-family: @robotoFont;
 	font-size: 1.1em;
 	color: #888;
 
