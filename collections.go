@@ -1180,7 +1180,7 @@ func handleWebCollectionUnlock(app *App, w http.ResponseWriter, r *http.Request)
 	}
 
 	if !auth.Authenticated(collHashedPass, []byte(readReq.Pass)) {
-		return impart.HTTPError{http.StatusUnauthorized, "Incorrect password."}
+		return impart.HTTPError{http.StatusUnauthorized, "Няправільны пароль."}
 	}
 
 	// Success; set cookie

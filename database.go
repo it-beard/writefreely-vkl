@@ -2029,7 +2029,7 @@ func (db *datastore) ChangeSettings(app *App, u *User, s *userSettings) error {
 				hashedPass = authUser.HashedPass
 			}
 			if !auth.Authenticated(hashedPass, []byte(s.OldPass)) {
-				errPass = impart.HTTPError{http.StatusUnauthorized, "Incorrect password."}
+				errPass = impart.HTTPError{http.StatusUnauthorized, "Няправільны пароль."}
 				return errPass
 			}
 		}
@@ -2092,7 +2092,7 @@ func (db *datastore) ChangePassphrase(userID int64, sudo bool, curPass string, h
 	}
 
 	if !sudo && !auth.Authenticated(dbPass, []byte(curPass)) {
-		return impart.HTTPError{http.StatusUnauthorized, "Incorrect password."}
+		return impart.HTTPError{http.StatusUnauthorized, "Няправільны пароль."}
 	}
 
 	_, err = db.Exec("UPDATE users SET password = ? WHERE id = ?", hashedPass, userID)

@@ -11,9 +11,9 @@
 				<nav class="dropdown-nav">
 					<ul><li><a href="/" title="View blog" class="title">{{.SiteName}}</a> <img class="ic-18dp" src="/img/ic_down_arrow_dark@2x.png" />
 						<ul>
-							{{if .IsAdmin}}<li><a href="/admin">Налады сервера</a></li>{{end}}
-							<li><a href="/me/settings">Налады акаўнта</a></li>
-							<li><a href="/me/import">Імпарт допісаў</a></li>
+							{{if .IsAdmin}}<li><a href="/admin">Панэль кіравання</a></li>{{end}}
+							<li><a href="/me/settings">Уліковы запіс</a></li>
+							<li><a href="/me/import">Імпарт</a></li>
 							<li><a href="/me/export">Экспарт</a></li>
 							<li class="separator"><hr /></li>
 							<li><a href="/me/logout">Выйсці</a></li>
@@ -37,9 +37,9 @@
 				{{if .Username}}
 				<nav class="dropdown-nav">
 					<ul><li class="has-submenu"><a>{{.Username}}</a> <img class="ic-18dp" src="/img/ic_down_arrow_dark@2x.png" /><ul>
-							{{if .IsAdmin}}<li><a href="/admin">Налады сервера</a></li>{{end}}
-							<li><a href="/me/settings">Налады акаўнта</a></li>
-							<li><a href="/me/import">Імпарт допісаў</a></li>
+							{{if .IsAdmin}}<li><a href="/admin">Панэль кіравання</a></li>{{end}}
+							<li><a href="/me/settings">Уліковы запіс</a></li>
+							<li><a href="/me/import">Імпарт</a></li>
 							<li><a href="/me/export">Экспарт</a></li>
 							{{if .CanInvite}}<li><a href="/me/invites">Запрасіць людзей</a></li>{{end}}
 							<li class="separator"><hr /></li>
@@ -108,7 +108,7 @@
 
 {{define "admin-header"}}
 <header class="admin">
-	<h1>Адмін</h1>
+	<h1>Панэль кіравання</h1>
 	<nav id="admin" class="pager">
 		<a href="/admin" {{if eq .Path "/admin"}}class="selected"{{end}}>Дашборд</a>
 		<a href="/admin/settings" {{if eq .Path "/admin/settings"}}class="selected"{{end}}>Налады</a>

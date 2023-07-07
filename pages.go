@@ -12,8 +12,9 @@ package writefreely
 
 import (
 	"database/sql"
-	"github.com/writefreely/writefreely/config"
 	"time"
+
+	"github.com/writefreely/writefreely/config"
 )
 
 var defaultPageUpdatedTime = time.Date(2018, 11, 8, 12, 0, 0, 0, time.Local)
@@ -60,7 +61,7 @@ func getPrivacyPage(app *App) (*instanceContent, error) {
 }
 
 func defaultPrivacyTitle() sql.NullString {
-	return sql.NullString{String: "Privacy Policy", Valid: true}
+	return sql.NullString{String: "Палітыка прыватнасці", Valid: true}
 }
 
 func defaultAboutPage(cfg *config.Config) string {

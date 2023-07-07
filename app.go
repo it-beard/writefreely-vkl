@@ -306,13 +306,19 @@ func handleViewLanding(app *App, w http.ResponseWriter, r *http.Request) error {
 	return renderPage(w, "landing.tmpl", p)
 }
 
-func DateFormatBlrLong(t time.Time) string {
+func DateFormatBlr(t time.Time) string {
 	return fmt.Sprintf("%d %s %d",
 		t.Day(), monthsBlr[t.Month()], t.Year(),
 	)
 }
 
-func DateFormatBlrPosts(t time.Time) string {
+func DateTimeFormatBlr(t time.Time) string {
+	return fmt.Sprintf("%d %s %d у %02d:%02d",
+		t.Day(), monthsBlr[t.Month()], t.Year(), t.Hour(), t.Minute(),
+	)
+}
+
+func DateTimeFormatBlrPointer(t *time.Time) string {
 	return fmt.Sprintf("%d %s %d у %02d:%02d",
 		t.Day(), monthsBlr[t.Month()], t.Year(), t.Hour(), t.Minute(),
 	)
@@ -360,7 +366,7 @@ func handleTemplatedPage(app *App, w http.ResponseWriter, r *http.Request, t *te
 		p.Content = template.HTML(applyMarkdown([]byte(c.Content), "", app.cfg))
 		p.PlainContent = shortPostDescription(stripmd.Strip(c.Content))
 		if !c.Updated.IsZero() {
-			p.Updated = DateFormatBlrLong(c.Updated)
+			p.Updated = DateFormatBlr(c.Updated)
 		}
 	}
 

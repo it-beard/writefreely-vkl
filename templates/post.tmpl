@@ -105,7 +105,7 @@
 		var $nav = document.getElementsByTagName('nav')[0];
 		for (var i=0; i<posts.length; i++) {
 			if (posts[i].id == "{{.ID}}") {
-				$nav.innerHTML = $nav.innerHTML + '<a class="xtra-feature" href="/edit/{{.ID}}" dir="{{.Direction}}">Edit</a>';
+				$nav.innerHTML = $nav.innerHTML + '<a class="xtra-feature" href="/edit/{{.ID}}" dir="{{.Direction}}">Рэдагаваць</a>';
 				var $ownerVis = document.querySelectorAll('.owner-visible');
 				for (var i=0; i<$ownerVis.length; i++) {
 					$ownerVis[i].classList.remove('owner-visible');

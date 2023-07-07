@@ -108,7 +108,7 @@ func (c instanceContent) UpdatedFriendly() string {
 		var loc monday.Locale = monday.LocaleEnUS
 		return monday.Format(u.Created, monday.DateTimeFormatsByLocale[loc], loc)
 	*/
-	return c.Updated.Format("January 2, 2006, 3:04 PM")
+	return DateTimeFormatBlr(c.Updated)
 }
 
 func handleViewAdminDash(app *App, u *User, w http.ResponseWriter, r *http.Request) error {
@@ -277,7 +277,7 @@ func handleViewAdminUser(app *App, u *User, w http.ResponseWriter, r *http.Reque
 		return impart.HTTPError{http.StatusInternalServerError, fmt.Sprintf("Could not get user's last post time: %v", err)}
 	}
 	if lp != nil {
-		p.LastPost = lp.Format("January 2, 2006, 3:04 PM")
+		p.LastPost = DateTimeFormatBlrPointer(lp)
 	}
 
 	colls, err := app.db.GetCollections(p.User, app.cfg.App.Host)
@@ -304,7 +304,7 @@ func handleViewAdminUser(app *App, u *User, w http.ResponseWriter, r *http.Reque
 			log.Error("Didn't get last post time for collection %d: %v", c.ID, err)
 		}
 		if lp != nil {
-			ic.LastPost = lp.Format("January 2, 2006, 3:04 PM")
+			ic.LastPost = DateTimeFormatBlrPointer(lp)
 		}
 
 		p.Colls = append(p.Colls, ic)
@@ -506,9 +506,9 @@ func handleViewAdminPage(app *App, u *User, w http.ResponseWriter, r *http.Reque
 	if err != nil {
 		return impart.HTTPError{http.StatusInternalServerError, fmt.Sprintf("Could not get page: %v", err)}
 	}
-	title := "New page"
+	title := "Новая старонка"
 	if p.Content != nil {
-		title = "Edit " + p.Content.ID
+		title = "Рэдагаваць " + p.Content.ID
 	} else {
 		p.Content = &instanceContent{}
 	}

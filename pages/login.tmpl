@@ -23,7 +23,7 @@ input{margin-bottom:0.5em;}
 		<input type="submit" id="btn-login" value="Увайсці" />
 	</form>
 
-	{{if and (not .SingleUser) .OpenRegistration}}<p style="text-align:center;font-size:0.9em;margin:3em auto;max-width:26em;">{{if .Message}}{{.Message}}{{else}}<em>Не маеш акаўнт?</em> <a href="{{.SignupPath}}">Рэгіструйся</a> і пачынай пісаць!{{end}}</p>{{end}}
+	{{if and (not .SingleUser) .OpenRegistration}}<p style="text-align:center;font-size:0.9em;margin:3em auto;max-width:26em;">{{if .Message}}{{.Message}}{{else}}<em>Не маеш уліковы запіс?</em> <a href="{{.SignupPath}}">Рэгіструйся</a> і пачынай пісаць!{{end}}</p>{{end}}
 
 	<script type="text/javascript">
 	function disableSubmit() {

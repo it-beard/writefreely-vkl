@@ -115,7 +115,7 @@ func (u User) CreatedFriendly() string {
 		var loc monday.Locale = monday.LocaleEnUS
 		return monday.Format(u.Created, monday.DateTimeFormatsByLocale[loc], loc)
 	*/
-	return u.Created.Format("January 2, 2006, 3:04 PM")
+	return DateTimeFormatBlr(u.Created)
 }
 
 // Cookie strips down an AuthUser to contain only information necessary for

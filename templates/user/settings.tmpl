@@ -24,26 +24,26 @@ h3 { font-weight: normal; }
 	{{if .Silenced}}
 		{{template "user-silenced"}}
 	{{end}}
-	<h1>{{if .IsLogOut}}Before you go...{{else}}Account Settings{{end}}</h1>
+	<h1>{{if .IsLogOut}}Перш чым выйсці...{{else}}Уліковы запіс{{end}}</h1>
 	{{if .Flashes}}<ul class="errors">
 		{{range .Flashes}}<li class="urgent">{{.}}</li>{{end}}
 	</ul>{{end}}
 
 	{{ if .IsLogOut }}
 	<div class="alert info">
-		<p class="introduction">Please add an <strong>email address</strong> and/or <strong>passphrase</strong> so you can log in again later.</p>
+		<p class="introduction">Каліласка, дадайце <strong>email-адрас</strong> ды/ці <strong>пароль</strong>, каб вы мелі магчымаць зайсці ў свой ўліковы запіс пазней.</p>
 	</div>
 	{{ else }}
 	<div>
-		<p>Change your account settings here.</p>
+		<p>Тут вы можаце змяніць налады свайго ўліковага запісу ці выдаліць яго.</p>
 	</div>
 
 	<form method="post" action="/api/me/self" autocomplete="false">
 		<div class="option">
-			<h3>Username</h3>
+			<h3>Імя карыстальніка</h3>
 			<div class="section">
 				<input type="text" name="username" value="{{.Username}}" tabindex="1" />
-				<input type="submit" value="Update" style="margin-left: 1em;" />
+				<input type="submit" value="Абнавіць" style="margin-left: 1em;" />
 			</div>
 		</div>
 	</form>
@@ -53,32 +53,33 @@ h3 { font-weight: normal; }
 	<form method="post" action="/api/me/self" autocomplete="false">
 		<input type="hidden" name="logout" value="{{.IsLogOut}}" />
 		<div class="option">
-			<h3>Passphrase</h3>
+			<h3>Пароль</h3>
 			<div class="section">
 				{{if and (not .HasPass) (not .IsLogOut)}}<div class="alert info"><p>Add a passphrase to easily log in to your account.</p></div>{{end}}
-				{{if .HasPass}}<p>Current passphrase</p>
-				<input type="password" name="current-pass" placeholder="Current passphrase" tabindex="1" /> <input class="show" type="checkbox" id="show-cur-pass" /><label for="show-cur-pass"> Show</label>
-				<p>New passphrase</p>
+				{{if .HasPass}}<p>Бягучы пароль</p>
+				<input type="password" name="current-pass" placeholder="Бягучы пароль" tabindex="1" /> <input class="show" type="checkbox" id="show-cur-pass" /><label for="show-cur-pass"> паказаць</label>
+				<p>Новы пароль</p>
 				{{end}}
 				{{if .IsLogOut}}<input type="text" value="{{.Username}}" style="display:none" />{{end}}
-				<input type="password" name="new-pass" autocomplete="new-password" placeholder="New passphrase" tabindex="{{if .IsLogOut}}1{{else}}2{{end}}" /> <input class="show" type="checkbox" id="show-new-pass" /><label for="show-new-pass"> Show</label>
+				<input type="password" name="new-pass" autocomplete="new-password" 
+					placeholder="Новы пароль" tabindex="{{if .IsLogOut}}1{{else}}2{{end}}" /> <input class="show" type="checkbox" id="show-new-pass" /><label for="show-new-pass"> паказаць</label>
 			</div>
 		</div>
 
 		<div class="option">
 			<h3>Email</h3>
 			<div class="section">
-				{{if and (not .Email) (not .IsLogOut)}}<div class="alert info"><p>Add your email to get:</p>
+				{{if and (not .Email) (not .IsLogOut)}}<div class="alert info"><p>Дадай свой емэйл, каб мець магчымасць:</p>
 				<ul>
-					<li>No-passphrase login</li>
-					<li>Account recovery if you forget your passphrase</li>
+					<li>Уваходзіць без паролю</li>
+					<li>Аднавіць ўліковы запіс у выпадку страты пароля</li>
 				</ul></div>{{end}}
-				<input type="email" name="email" style="letter-spacing: 1px" placeholder="Email address" value="{{.Email}}" size="40" tabindex="{{if .IsLogOut}}2{{else}}3{{end}}" />
+				<input type="email" name="email" style="letter-spacing: 1px" placeholder="belarus@example.com" value="{{.Email}}" size="40" tabindex="{{if .IsLogOut}}2{{else}}3{{end}}" />
 			</div>
 		</div>
 
 		<div class="option" style="text-align: center;">
-			<input type="submit" value="Save changes" tabindex="4" />
+			<input type="submit" value="Захаваць змяненні" tabindex="4" />
 		</div>
 	</form>
 	{{end}}
@@ -159,24 +160,28 @@ h3 { font-weight: normal; }
 	{{ end }}
 
 	{{ if and .OpenDeletion (not .IsAdmin) }}
-		<h2>Incinerator</h2>
+		<h2>Выдаленне ўліковага запісу</h2>
 		<div class="alert danger">
 			<div class="row">
 				<div>
-					<h3>Delete your account</h3>
-					<p>Permanently erase all your data, with no way to recover it.</p>
+					<p>
+						Гэтым дзеяннем вы можаце цалкам выдаліць ваш уліковы запіс з усімі блогамі, допісамі, ды 
+						без магчымасці аднавіць дадзеныя.
+					</p>
 				</div>
-				<button class="cta danger" onclick="prepareDeleteUser()">Delete your account...</button>
+				<button class="cta danger" onclick="prepareDeleteUser()">Выдаліць уліковы запіс</button>
 			</div>
 		</div>
 	{{end}}
 </div>
 
 <div id="modal-delete-user" class="modal">
-	<h2>Are you sure?</h2>
+	<h2>Вы ўпэўнены?</h2>
 	<div class="body">
-		<p style="text-align:left">This action <strong>cannot</strong> be undone. It will immediately and permanently erase your account, including your blogs and posts. Before continuing, you might want to <a href="/me/export">export your data</a>.</p>
-		<p>If you're sure, please type <strong>{{.Username}}</strong> to confirm.</p>
+		<p style="text-align:left">Гэты ўліковы запіс <strong>нельга будзе</strong> аднавіць. 
+			Гэта неадкладна і назаўсёды выдаліць ваш уліковы запіс,
+			уключаючы вашыя блогі і допісы. Перш чым працягнуць, магчыма, вы захочаце <a href="/me/export">экспартаваць вашыя дадзеныя</a>.</p>
+		<p>Калі вы ўпэўнены, калі ласка, увядзіце <strong>{{.Username}}</strong> каб працягнуць.</p>
 
 		<ul id="delete-errors" class="errors"></ul>
 
@@ -184,8 +189,8 @@ h3 { font-weight: normal; }
 			{{ .CSRFField }}
 			<input id="confirm-text" placeholder="{{.Username}}" type="text" class="confirm boxy" name="confirm-username" style="margin-top: 0.5em;" />
 			<div style="text-align:right; margin-top: 1em;">
-				<a id="cancel-delete" style="margin-right:2em" href="#">Cancel</a>
-				<input class="danger" type="submit" id="confirm-delete" value="Delete your account" disabled />
+				<a id="cancel-delete" style="margin-right:2em" href="#">Адмяніць</a>
+				<input class="danger" type="submit" id="confirm-delete" value="Выдаліць уліковы запіс" disabled />
 			</div>
 	</div>
 </div>

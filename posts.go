@@ -1151,7 +1151,7 @@ func fetchPostProperty(app *App, w http.ResponseWriter, r *http.Request) error {
 func (p *Post) processPost() PublicPost {
 	res := &PublicPost{Post: p, Views: 0}
 	res.Views = p.ViewCount
-	res.DisplayDate = DateFormatBlrPosts(p.Created)
+	res.DisplayDate = DateTimeFormatBlr(p.Created)
 
 	return *res
 }

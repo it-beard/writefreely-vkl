@@ -6,7 +6,7 @@
     {{if not .SingleUser}}
     <header class="admin">
         <nav class="pager">
-            {{if .CanPost}}<a href="{{if .SingleUser}}/me/new{{else}}/#{{.Alias}}{{end}}" class="btn gentlecta">Новы допіс</a>{{end}}
+            <a href="{{if .SingleUser}}/me/new{{ else }}/new#{{.Alias}}{{end}}" class="btn gentlecta">Новы допіс</a>
             <a href="/me/c/{{.Alias}}" {{if and (hasPrefix .Path "/me/c/") (hasSuffix .Path .Alias)}}class="selected"{{end}}>Наладзіць</a>
             <a href="/me/c/{{.Alias}}/stats" {{if hasSuffix .Path "/stats"}}class="selected"{{end}}>Статыстыка</a>
             <a href="{{if .SingleUser}}/{{else}}/{{.Alias}}/{{end}}">Праглядзець блог &rarr;</a>

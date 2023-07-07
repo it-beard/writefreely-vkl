@@ -51,94 +51,94 @@ input.copy-text {
 	{{end}}
 	<table class="classy export">
 		<tr>
-			<th>No.</th>
+			<th>Нумар</th>
 			<td>{{.User.ID}}</td>
 		</tr>
 		<tr>
-			<th>Type</th>
-			<td>{{if .User.IsAdmin}}Admin{{else}}User{{end}}</td>
+			<th>Роля</th>
+			<td>{{if .User.IsAdmin}}Адміністратар{{else}}Карытсальнік{{end}}</td>
 		</tr>
 		<tr>
-			<th>Username</th>
+			<th>Імя карыстальніка</th>
 			<td>{{.User.Username}}</td>
 		</tr>
 		<tr>
-			<th>Joined</th>
+			<th>Далучыўся</th>
 			<td>{{.User.CreatedFriendly}}</td>
 		</tr>
 		<tr>
-			<th>Total Posts</th>
+			<th>Усяго допісаў</th>
 			<td>{{.TotalPosts}}</td>
 		</tr>
 		<tr>
-			<th>Last Post</th>
-			<td>{{if .LastPost}}{{.LastPost}}{{else}}Never{{end}}</td>
+			<th>Апошні допіс</th>
+			<td>{{if .LastPost}}{{.LastPost}}{{else}}Ніколі{{end}}</td>
 		</tr>
 		<tr>
 			<form action="/admin/user/{{.User.Username}}/status" method="POST" {{if not .User.IsSilenced}}onsubmit="return confirmSilence()"{{end}}>
-				<th><a id="status"></a>Status</th>
+				<th><a id="status"></a>Статус</th>
 				<td class="active-silence">
 				{{if .User.IsSilenced}}
-					<p>Silenced</p>
-					<input type="submit" value="Unsilence"/>
+					<p>Замоўчаны</p>
+					<input type="submit" value="Разм'ютаць"/>
 				{{else}}
-					<p>Active</p>
-					<input class="danger" type="submit" value="Silence" {{if .User.IsAdmin}}disabled{{end}}/>
+					<p>Актыўны</p>
+					<input class="danger" type="submit" value="Зам'ютаць" {{if .User.IsAdmin}}disabled{{end}}/>
 				{{end}}
 				</td>
 			</form>
 		</tr>
 		<tr>
-			<th>Password</th>
+			<th>Пароль</th>
 			<td>
 				{{if ne .Username .User.Username}}
 				<form id="reset-form" action="/admin/user/{{.User.Username}}/passphrase" method="post" autocomplete="false">
 					<input type="hidden" name="user" value="{{.User.ID}}"/>
-					<button type="submit">Reset</button>
+					<button type="submit">Скінуць</button>
 				</form>
 				{{else}}
-				<a href="/me/settings" title="Go to reset password page">Change your password</a>
+				<a href="/me/settings" title="Go to reset password page">Змяніць ваш пароль</a>
 				{{end}}
 			</td>
 		</tr>
 	</table>
 
-	<h2>Blogs</h2>
+	<h2>Блогі</h2>
 
 	{{range .Colls}}
 	<h3><a href="/{{.Alias}}/">{{.Title}}</a></h3>
 	<table class="classy export">
 		<tr>
-			<th>Alias</th>
+			<th>Аліас</th>
 			<td>{{.Alias}}</td>
 		</tr>
 		<tr>
-			<th>Title</th>
+			<th>Назва</th>
 			<td>{{.Title}}</td>
 		</tr>
 		<tr>
-			<th>Description</th>
+			<th>Апісанне</th>
 			<td>{{.Description}}</td>
 		</tr>
 		<tr>
-			<th>Visibility</th>
+			<th>Бачнасць</th>
 			<td>{{.FriendlyVisibility}}</td>
 		</tr>
 		<tr>
-			<th>Views</th>
+			<th>Прагляды</th>
 			<td>{{.Views}}</td>
 		</tr>
 		<tr>
-			<th>Posts</th>
+			<th>Допісы</th>
 			<td>{{.TotalPosts}}</td>
 		</tr>
 		<tr>
-			<th>Last Post</th>
-			<td>{{if .LastPost}}{{.LastPost}}{{else}}Never{{end}}</td>
+			<th>Апошні допіс</th>
+			<td>{{if .LastPost}}{{.LastPost}}{{else}}Ніколі{{end}}</td>
 		</tr>
 		{{if $.Config.Federation}}
 		<tr>
-			<th>Fediverse Followers</th>
+			<th>Падпісчыкаў у Федывёрсе</th>
 			<td>{{.Followers}}</td>
 		</tr>
 		{{end}}
@@ -146,14 +146,14 @@ input.copy-text {
 	{{end}}
 
 	{{ if not .User.IsAdmin }}
-	<h2>Incinerator</h2>
+	<h2>Выдаленне ўліковага запісу</h2>
 	<div class="alert danger">
 		<div class="row">
 			<div>
-				<h3>Delete this user</h3>
+				<h3>Выдаліць гэтага карыстальніка</h3>
 				<p>Permanently erase all user data, with no way to recover it.</p>
 			</div>
-			<button class="cta danger" onclick="prepareDeleteUser()">Delete this user...</button>
+			<button class="cta danger" onclick="prepareDeleteUser()">Выдаліць гэтага карыстальніка...</button>
 		</div>
 	</div>
 	{{end}}

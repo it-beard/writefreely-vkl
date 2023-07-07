@@ -31,8 +31,9 @@
 				{{if .Username}}
 				<nav class="dropdown-nav">
 					<ul><li class="has-submenu"><a>{{.Username}}</a> <img class="ic-18dp" src="/img/ic_down_arrow_dark@2x.png" /><ul>
-							{{if .IsAdmin}}<li><a href="/admin">Налады сервера</a></li>{{end}}
-							<li><a href="/me/settings">Налады акаўнта</a></li>
+							{{if .IsAdmin}}<li><a href="/admin">Панэль кіравання</a></li>{{end}}
+							<li><a href="/me/settings">Уліковы запіс</a></li>
+							<li><a href="/me/import">Імпарт</a></li>
 							<li><a href="/me/export">Экспарт</a></li>
 							{{if .CanInvite}}<li><a href="/me/invites">Запрасіць людзей</a></li>{{end}}
 							<li class="separator"><hr /></li>

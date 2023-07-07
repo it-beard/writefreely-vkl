@@ -22,7 +22,7 @@
 		
 		<header id="tools">
 			<div id="clip">
-				{{if not .SingleUser}}<h1><a href="/me/c/" title="View blogs"><img class="ic-24dp" src="/img/ic_blogs_dark@2x.png" /></a></h1>{{end}}
+				{{if not .SingleUser}}<h1><a href="/me/c/" title="Да блогаў"><img class="ic-24dp" src="/img/ic_blogs_dark@2x.png" /></a></h1>{{end}}
 				<nav id="target" {{if .SingleUser}}style="margin-left:0"{{end}}><ul>
 						{{if .Editing}}<li>{{if .EditCollection}}<a href="{{.EditCollection.CanonicalURL}}">{{.EditCollection.Title}}</a>{{else}}<a>Чарнавік</a>{{end}}</li>
 						{{else}}<li class="has-submenu"><a href="#" id="publish-to" onclick="return false"><span id="target-name">Чарнавік</span> <img class="ic-18dp" src="/img/ic_down_arrow_dark@2x.png" /></a>

@@ -23,19 +23,19 @@ td.none {
 
 	{{template "collection-breadcrumbs" .}}
 
-	<h1 id="posts-header">Stats</h1>
+	<h1 id="posts-header">Статыстыка</h1>
 
 	{{if .Collection}}
 		{{template "collection-nav" (dict "Alias" .Collection.Alias "Path" .Path "SingleUser" .SingleUser)}}
 	{{end}}
 
-	<p>Stats for all time.</p>
+	<p>Статыстыка адлюстроўваецца за ўвесь час існавання вашага уліковага запісу.</p>
 	
 	{{if .Federation}}
-	<h3>Fediverse stats</h3>
+	<h3>Статыстыка Федывёрса</h3>
 	<table id="fediverse" class="classy export">
 		<tr>
-			<th>Followers</th>
+			<th>Падпісчыкаў</th>
 		</tr>
 		<tr>
 			<td>{{.APFollowers}}</td>
@@ -43,16 +43,24 @@ td.none {
 	</table>
 	{{end}}
 
-	<h3>Top {{len .TopPosts}} posts</h3>
+	<h3>Апошнія допісы ({{len .TopPosts}}шт.)</h3>
 	<table class="classy export">
 		<tr>
-			<th>Post</th>
-			{{if not .Collection}}<th>Blog</th>{{end}}
-			<th class="num">Total Views</th>
+			<th>Допіс</th>
+			{{if not .Collection}}<th>Блог</th>{{end}}
+			<th class="num">Прагляды</th>
 		</tr>
 		{{range .TopPosts}}<tr>
-			<td style="word-break: break-all;"><a href="{{if .Collection}}{{.Collection.CanonicalURL}}{{.Slug.String}}{{else}}/{{.ID}}{{end}}">{{if ne .DisplayTitle ""}}{{.DisplayTitle}}{{else}}<em>{{.ID}}</em>{{end}}</a></td>
-			{{ if not $.Collection }}<td>{{if .Collection}}<a href="{{.Collection.CanonicalURL}}">{{.Collection.Title}}</a>{{else}}<em>Чарнавік</em>{{end}}</td>{{ end }}
+			<td style="word-break: break-all;">
+				<a href="{{if .Collection}}{{.Collection.CanonicalURL}}{{.Slug.String}}{{else}}/{{.ID}}{{end}}">{{if ne .DisplayTitle ""}}{{.DisplayTitle}}{{else}}<em>{{.ID}}</em>{{end}}</a>
+			</td>
+			{{ if not $.Collection }}
+			<td>
+				{{if .Collection}}
+					<a href="{{.Collection.CanonicalURL}}">{{.Collection.Title}}</a>
+				{{else}}<em>Чарнавік</em>{{end}}
+			</td>
+			{{ end }}
 			<td class="num">{{.ViewCount}}</td>
 		</tr>{{end}}
 	</table>

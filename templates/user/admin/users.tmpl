@@ -11,23 +11,23 @@
 		</p>
 	{{end}}
 	<div class="row admin-actions" style="justify-content: space-between;">
-		<span style="font-style: italic; font-size: 1.2em">{{.TotalUsers}} {{pluralize "user" "users" .TotalUsers}}</span>
-		<a class="btn cta" href="/me/invites">+ Invite people</a>
+		<span style="font-style: italic; font-size: 1.2em">Усяго карыстальнікаў: <b>{{.TotalUsers}}</b></span>
+		{{if .CanInvite}} <a class="btn cta" href="/me/invites">+ Запрасіць чалавека</a> {{end}}
 	</div>
 
 	<table class="classy export" style="width:100%">
 		<tr>
-			<th>User</th>
-			<th>Joined</th>
-			<th>Type</th>
-			<th>Status</th>
+			<th>Карыстальнік</th>
+			<th>Далучыўся</th>
+			<th>Роля</th>
+			<th>Статус</th>
 		</tr>
 		{{range .Users}}
 		<tr>
 			<td><a href="/admin/user/{{.Username}}">{{.Username}}</a></td>
 			<td>{{.CreatedFriendly}}</td>
-			<td style="text-align:center">{{if .IsAdmin}}Admin{{else}}User{{end}}</td>
-			<td style="text-align:center">{{if .IsSilenced}}Silenced{{else}}Active{{end}}</td>
+			<td style="text-align:center">{{if .IsAdmin}}Адмін{{else}}Карыстальнік{{end}}</td>
+			<td style="text-align:center">{{if .IsSilenced}}Замоўчаны{{else}}Актыўны{{end}}</td>
 		</tr>
 		{{end}}
 	</table>

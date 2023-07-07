@@ -20,7 +20,7 @@ import (
 
 func viewImport(app *App, u *User, w http.ResponseWriter, r *http.Request) error {
 	// Fetch extra user data
-	p := NewUserPage(app, r, u, "Import Posts", nil)
+	p := NewUserPage(app, r, u, "Імпарт допісаў", nil)
 
 	c, err := app.db.GetCollections(u, app.Config().App.Host)
 	if err != nil {

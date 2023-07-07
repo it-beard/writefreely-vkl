@@ -51,9 +51,17 @@ p.docs {
 	{{if .Message}}<p>{{.Message}}</p>{{end}}
 
 	<div class="row stats">
-		<div><span class="num">{{largeNumFmt .UsersCount}}</span> {{pluralize "user" "users" .UsersCount}}</div>
-		<div><span class="num">{{largeNumFmt .CollectionsCount}}</span> {{pluralize "blog" "blogs" .CollectionsCount}}</div>
-		<div><span class="num">{{largeNumFmt .PostsCount}}</span> {{pluralize "post" "posts" .PostsCount}}</div>
+		<ul>
+			<li>
+				<div>Уліковых запісаў: <b>{{largeNumFmt .UsersCount}}</b></div>
+			</li>
+			<li>
+				<div>Блогаў: <b>{{largeNumFmt .CollectionsCount}}</b></div>
+			</li>
+			<li>
+				<div>Допісаў: <b>{{largeNumFmt .PostsCount}}</b></div>
+			</li>
+		</ul>
 	</div>
 
 </div>

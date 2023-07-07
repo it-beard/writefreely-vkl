@@ -512,7 +512,7 @@ func login(app *App, w http.ResponseWriter, r *http.Request) error {
 			return impart.HTTPError{http.StatusUnauthorized, "This user never set a password. Perhaps try logging in via OAuth?"}
 		}
 		if !auth.Authenticated(u.HashedPass, []byte(signin.Pass)) {
-			return impart.HTTPError{http.StatusUnauthorized, "Incorrect password."}
+			return impart.HTTPError{http.StatusUnauthorized, "Няправільны пароль."}
 		}
 	}
 
@@ -590,7 +590,7 @@ func getVerboseAuthUser(app *App, token string, u *User, verbose bool) *AuthUser
 
 func viewExportOptions(app *App, u *User, w http.ResponseWriter, r *http.Request) error {
 	// Fetch extra user data
-	p := NewUserPage(app, r, u, "Export", nil)
+	p := NewUserPage(app, r, u, "Экспарт", nil)
 
 	showUserPage(w, "export", p)
 	return nil
@@ -879,7 +879,7 @@ func viewEditCollection(app *App, u *User, w http.ResponseWriter, r *http.Reques
 		*Collection
 		Silenced bool
 	}{
-		UserPage:   NewUserPage(app, r, u, "Edit "+c.DisplayTitle(), flashes),
+		UserPage:   NewUserPage(app, r, u, "Рэдагаваць "+c.DisplayTitle(), flashes),
 		Collection: c,
 		Silenced:   silenced,
 	}
@@ -969,7 +969,7 @@ func updateSettings(app *App, w http.ResponseWriter, r *http.Request) error {
 			redirectTo = "/me/logout"
 		} else {
 			sess.Values[cookieUserVal] = u.Cookie()
-			addSessionFlash(app, w, r, "Account updated.", nil)
+			addSessionFlash(app, w, r, "Уліковы запіс абноўлены.", nil)
 		}
 	}
 
@@ -1061,7 +1061,7 @@ func viewStats(app *App, u *User, w http.ResponseWriter, r *http.Request) error 
 		APFollowers int
 		Silenced    bool
 	}{
-		UserPage:   NewUserPage(app, r, u, titleStats+"Stats", flashes),
+		UserPage:   NewUserPage(app, r, u, titleStats+"Статыстыка", flashes),
 		VisitsBlog: alias,
 		Collection: c,
 		TopPosts:   topPosts,
@@ -1146,7 +1146,7 @@ func viewSettings(app *App, u *User, w http.ResponseWriter, r *http.Request) err
 		OauthGitea              bool
 		GiteaDisplayName        string
 	}{
-		UserPage:                NewUserPage(app, r, u, "Account Settings", flashes),
+		UserPage:                NewUserPage(app, r, u, "Уліковы запіс", flashes),
 		Email:                   fullUser.EmailClear(app.keys),
 		HasPass:                 passIsSet,
 		IsLogOut:                r.FormValue("logout") == "1",

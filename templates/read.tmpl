@@ -66,6 +66,11 @@
 			padding-bottom: 0 !important;
 		}
 
+		article:first-child {
+			border-top: 1.5px solid #f7f4f4;
+			padding-top: 2em !important;
+		}
+
 		article p.source {
 			font-size: 0.86em;
 			font-weight: bold;
@@ -122,7 +127,7 @@
 		}
 
 		a.read-more {
-			background-color: #c90202;
+			background-color: #c90202d1;
 			color: white !important;
 			padding: 5px 10px;
 			display: inline-block;
@@ -135,6 +140,7 @@
 		a.read-more:hover {
 			background-color: #700101;
 			text-decoration: none;
+			transition: 0.3s;
 		}
 
 		.delimiter {
@@ -153,7 +159,7 @@
 {{define "body-attrs"}}id="collection"{{end}}
 {{define "content"}}
 	<div class="content-container snug">
-		<h1>{{.ContentTitle}}</h1>
+		{{if not .Chorus }}<h1>{{.ContentTitle}}</h1>{{end}}
 		<p{{if .SelTopic}} style="text-align:center"{{end}}>{{if .SelTopic}}#{{.SelTopic}} posts{{else}}{{.Content}}{{end}}</p>
 	</div>
 		<div id="wrapper">
