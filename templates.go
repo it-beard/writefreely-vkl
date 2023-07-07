@@ -110,7 +110,7 @@ func initUserPage(parentDir, path, key string) {
 	userPages[key] = template.Must(template.New(key).Funcs(funcMap).ParseFiles(
 		path,
 		filepath.Join(parentDir, templatesDir, "user", "include", "header.tmpl"),
-		filepath.Join(parentDir, templatesDir, "user", "include", "footer.tmpl"),
+		filepath.Join(parentDir, templatesDir, "include", "footer.tmpl"),
 		filepath.Join(parentDir, templatesDir, "user", "include", "silenced.tmpl"),
 		filepath.Join(parentDir, templatesDir, "user", "include", "nav.tmpl"),
 	))

@@ -10,8 +10,11 @@
 		<meta name="application-name" content="{{.SiteName}}">
 		<meta name="application-url" content="{{.Host}}">
 		<meta property="og:site_name" content="{{.SiteName}}" />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
 		<style>
-			.left-side h2 a {
+			.left-side h1 a {
 				font-family: Lora,'Palatino Linotype','Book Antiqua','New York','DejaVu serif',serif !important;
 			}
 		</style>
@@ -26,28 +29,8 @@
 
 		{{ template "footer" . }}
 		
-		{{if not .JSDisabled}}
+
 		<script type="text/javascript" src="/js/menu.js"></script>
-		<script type="text/javascript">
-		{{if .WebFonts}}
-		try { // Google Fonts
-		  WebFontConfig = {
-			custom: { families: [ 'Lora:400,700:latin', 'Open+Sans:400,700:latin' ], urls: [ '/css/fonts.css' ] }
-		  };
-		  (function() {
-			var wf = document.createElement('script');
-			wf.src = '/js/webfont.js';
-			wf.type = 'text/javascript';
-			wf.async = 'true';
-			var s = document.getElementsByTagName('script')[0];
-			s.parentNode.insertBefore(wf, s);
-			})();
-		} catch (e) { /* ¯\_(ツ)_/¯ */ }
-		{{end}}
-		</script>
-		{{else}}
-			{{if .WebFonts}}<link href="/css/fonts.css" rel="stylesheet" type="text/css" />{{end}}
-		{{end}}
 	</body>
 </html>{{end}}
 {{define "body-attrs"}}{{end}}

@@ -1,17 +1,7 @@
 body {
 	&#post, &#subpage {
 		header {
-			margin: 0 auto;
-			padding: 1em 2rem;
-			.opacity(0.4);
-			-moz-transition-property: opacity;
-			-webkit-transition-property: opacity;
-			-o-transition-property: opacity;
-			transition-property: opacity;
-			.transition-duration(.4s);
-			&:hover {
-				.opacity(1);
-			}
+			font-size: 0.86em;
 		}
 		article {
 			h2#title.dated {
@@ -22,6 +12,19 @@ body {
 				color: #666;
 				margin-bottom: 1em;
 			}
+			.p-name {
+				color: #1f1f1f;
+			}
+			div.dt-published {
+				display: block;
+				color: #666;
+				margin-bottom: 1em;
+				font-size: 0.9em;
+				text-transform: lowercase;
+			}
+		}
+		footer {
+			font-size: 0.86em;
 		}
 	}
 }

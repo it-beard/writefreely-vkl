@@ -1,7 +1,6 @@
 {{define "footer"}}
-		<footer{{if not (or .SingleUser .WFModesty)}} class="contain-me"{{end}}>
+		<footer>
 			<hr />
-			{{if or .SingleUser .WFModesty}}
 			<nav>
 				<a class="home" href="/">{{.SiteName}}</a>
 				<a href="/about">Пра нас</a>
@@ -10,28 +9,5 @@
 				<a href="/privacy">Палітыка прыватнасці</a>
 				<p style="font-size: 0.9em">Працуе на базе адаптаванай версіі <a href="https://github.com/it-beard/writefreely-vkl" target="_blank">WriteFreely</a></p>
 			</nav>
-			{{else}}
-			<div class="marketing-section">
-				<div class="clearfix blurbs">
-					<div class="half">
-						<h3><a class="home" href="/">{{.SiteName}}</a></h3>
-						<ul>
-							<li><a href="/about">Пра нас</a></li>
-							{{if and (and (not .SingleUser) .LocalTimeline) .CanViewReader}}<a href="/read">Стужка</a>{{end}}
-							<li><a href="/privacy">Палітыка прыватнасці</a></li>
-						</ul>
-					</div>
-					<div class="half">
-						<h3><a href="https://writefreely.org" style="color:#444;text-transform:lowercase;">WriteFreely</a></h3>
-						<ul>
-							<li><a href="https://writefreely.org/guide/{{.OfficialVersion}}" target="guide">writer's guide</a></li>
-							<li><a href="https://developers.write.as/" title="Build on WriteFreely with our open developer API.">developers</a></li>
-							<li><a href="https://github.com/writefreely/writefreely">source code</a></li>
-							<li style="margin-top:0.8em">{{.Version}}</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			{{end}}
 		</footer>
 {{end}}

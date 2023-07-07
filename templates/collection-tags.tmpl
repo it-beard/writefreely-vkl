@@ -64,12 +64,7 @@
 		{{if .Posts}}</section>{{else}}</div>{{end}}
 
 		{{ if .Collection.ShowFooterBranding }}
-		<footer dir="ltr">
-			<hr>
-			<nav>
-				<p style="font-size: 0.9em"><a class="home pubd" href="/">{{.SiteName}}</a> &middot; Працуе на базе адаптаванай версіі <a href="https://github.com/it-beard/writefreely-vkl" target="_blank">WriteFreely</a></p>
-			</nav>
-		</footer>
+		{{template "footer" .}}
 		{{ end }}
 	</body>
 	
