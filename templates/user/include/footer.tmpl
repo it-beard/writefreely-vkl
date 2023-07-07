@@ -9,7 +9,7 @@
 		<nav>
 			<a class="home" href="/">{{.SiteName}}</a>
 			{{if not .SingleUser}}<a href="/about">Пра нас</a>{{end}}
-			{{if and (not .SingleUser) .LocalTimeline}}<a href="/read">Стужка</a>{{end}}
+			{{if and (not .SingleUser) .LocalTimeline (not .Chorus)}}<a href="/read">Стужка</a>{{end}}
 			<a href="https://writefreely.org/guide/{{.OfficialVersion}}" target="guide">Інструкцыя для аўтараў</a>
 			{{if not .SingleUser}}<a href="/privacy">Палітыка прыватнасці</a>{{end}}
       {{if .WFModesty}}
