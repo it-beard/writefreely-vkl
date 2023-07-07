@@ -12,3 +12,4 @@ tmp
 bindata.go
 .DS_Store
 writefreely
+certs
