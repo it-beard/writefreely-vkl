@@ -64,7 +64,20 @@
 		<article id="post-body" class="{{.Font}} h-entry">{{if .IsScheduled}}<p class="badge">Запланаваны</p>{{end}}{{if .Title.String}}<h2 id="title" class="p-name{{if $.Collection.Format.ShowDates}} dated{{end}}">{{.FormattedDisplayTitle}}</h2>{{end}}{{if and $.Collection.Format.ShowDates (not .IsPinned)}}<div class="dt-published">{{.DisplayDate}}</div>{{end}}<div class="e-content">{{.HTMLContent}}</div></article>
 
 		{{ if .Collection.ShowFooterBranding }}
-		{{template "footer" . }}
+			<footer style="margin: 0 auto; max-width: 40rem">
+				<p style="text-align: left">Апублікавана ў <a rel="author" href="{{if .IsTopLevel}}/{{else}}/{{.Collection.Alias}}/{{end}}" class="h-card p-author">{{.Collection.DisplayTitle}}</a>
+					{{ if .IsOwner }} &middot; <span class="views" dir="ltr">Праглядаў: <strong>{{largeNumFmt .Views}}</strong></span>
+					&middot; <a class="xtra-feature" href="/{{if not .SingleUser}}{{.Collection.Alias}}/{{end}}{{.Slug.String}}/edit" dir="{{.Direction}}">Рэдагаваць</a>
+					{{if .IsPinned}} &middot; <a class="xtra-feature unpin" href="/{{.Collection.Alias}}/{{.Slug.String}}/unpin" dir="{{.Direction}}" onclick="unpinPost(event, '{{.ID}}')">Адмацаваць</a>{{end}}
+					{{ end }}
+				</p>
+				<nav>
+					{{if .PinnedPosts}}
+					{{range .PinnedPosts}}<a class="pinned{{if eq .Slug.String $.Slug.String}} selected{{end}}" href="{{if not $.SingleUser}}/{{$.Collection.Alias}}/{{.Slug.String}}{{else}}{{.CanonicalURL $.Host}}{{end}}">{{.PlainDisplayTitle}}</a>{{end}}
+					{{end}}
+				</nav>
+			</footer>
+			{{template "footer" . }}
 		{{ end }}
 	</body>
 	
