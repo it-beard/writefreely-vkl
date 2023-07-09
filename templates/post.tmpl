@@ -32,29 +32,48 @@
 		<meta property="og:description" content="{{.Description}}" />
 		{{range .Images}}<meta property="og:image" content="{{.}}" />{{else}}<meta property="og:image" content="{{.Host}}/img/wf-sq.png">{{end}}
 		{{if .Author}}<meta property="article:author" content="https://{{.Author}}" />{{end}}
-		<!-- Add highlighting logic -->
-		{{template "highlighting" .}}
+		{{if .IsOwner}}
+			{{if eq (len .Collections) 1}}
+				<style type="text/css"> {{ (index .Collections 0).StyleSheetDisplay }}</style>
+			{{else}}
+				<style type="text/css" id="applied_css"></style>
+			{{end}}
+		{{end}}
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
-		<style>
-			.left-side h1 a {
-				font-family: Lora,'Palatino Linotype','Book Antiqua','New York','DejaVu serif',serif !important;
-			}
-		</style>
+		
+		<!-- Add highlighting logic -->
+		{{template "highlighting" .}}
 	</head>
 	<body id="post">
-		<header>
-			<h1 dir="{{.Direction}}"><a href="/">{{.SiteName}}</a></h1>
-			<nav>
-				<span class="views{{if not .IsOwner}} owner-visible{{end}}" dir="ltr">Праглядаў: <strong>{{largeNumFmt .Views}}</strong></span>
-				{{if .IsCode}}<a href="/{{.ID}}.txt" rel="noindex" dir="{{.Direction}}">Праглядзець зыходнік</a>{{end}}
-				{{ if .Username }}
-				{{if .IsOwner}}
-				<a href="/{{if .SingleUser}}d/{{end}}{{.ID}}/edit" dir="{{.Direction}}">Рэдагаваць</a>
-				{{end}}
-				<a class="xtra-feature dash-nav" href="/me/posts/" dir="{{.Direction}}">Чарнавікі</a>
-				{{ end }}
+		<header class="multiuser">
+			<nav id="full-nav">
+				<div class="left-side">
+					<h1 dir="{{.Direction}}">
+						<a href="/">{{.SiteName}}</a>
+					</h1>
+				</div>
+				<nav id="user-nav">
+					<span class="views{{if not .IsOwner}} owner-visible{{end}}" dir="ltr">Праглядаў: <strong>{{largeNumFmt .Views}}</strong></span>
+					{{if .IsCode}}<a href="/{{.ID}}.txt" rel="noindex" dir="{{.Direction}}">Праглядзець зыходнік</a>{{end}}
+					{{ if .Username }}
+					{{if .IsOwner}}
+					<a href="/{{if .SingleUser}}d/{{end}}{{.ID}}/edit" dir="{{.Direction}}">Рэдагаваць</a>
+					{{end}}
+					<a class="xtra-feature dash-nav" href="/me/posts/" dir="{{.Direction}}">Чарнавікі</a>
+					{{ end }}
+					{{if .IsOwner}} 
+					<div style="display: inline-block; margin-left: 2em;">
+						<span>Прымяніць стыль:</span>
+						<select id="css_selector">
+							{{range $i, $el := .Collections}}
+							<option value="{{.StyleSheetDisplay}}">{{.Title}}</option>
+							{{ end }}
+						</select>
+					</div>
+					{{ end }}
+				</nav>
 			</nav>
 		</header>
 
@@ -108,4 +127,26 @@
 		}
 	}
 	</script>
+
+	{{if and .IsOwner (ne (len .Collections) 1)}}
+	<script>
+		document.addEventListener("DOMContentLoaded", () => {
+			var $select = document.getElementById('css_selector');
+			var $style = document.getElementById('applied_css');
+			var previousStyleValue = localStorage.getItem("draftsSelectedCss");
+			if (previousStyleValue || previousStyleValue === "") {
+				$style.innerHTML = previousStyleValue;
+				$select.value = previousStyleValue;
+			} else {
+				$style.innerHTML = $select.value;
+			}
+			$select.onchange = function() {
+				styleValue = $select.value;
+				$style.innerHTML = styleValue;
+				localStorage.setItem("draftsSelectedCss", styleValue);
+				localStorage.setItem("draftsSelectedCssCollection", $select.selectedOptions[0].text);
+			}
+		});
+	</script>
+	{{end}}
 </html>{{end}}
