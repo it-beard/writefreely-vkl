@@ -2,7 +2,7 @@
 <html>
 	<head>
 
-		<title>{{if .Editing}}Рэдагаванне {{if .Post.Title}}{{.Post.Title}}{{else}}{{.Post.Id}}{{end}}{{else}}Довы допіс{{end}} &mdash; {{.SiteName}}</title>
+		<title>{{if .Editing}}Рэдагаванне {{if .Post.Title}}"{{.Post.Title}}"{{else}}{{.Post.Id}}{{end}}{{else}}Довы допіс{{end}} &mdash; {{.SiteName}}</title>
 		
 		<link rel="stylesheet" type="text/css" href="/css/write.css" />
 		{{if .CustomCSS}}<link rel="stylesheet" type="text/css" href="/local/custom.css" />{{end}}
@@ -417,6 +417,81 @@
 		} catch (e) {
 		  // whatevs
 		}
+		</script>
+
+		<!-- Markdown formatting -->
+		<script>
+			document.addEventListener("DOMContentLoaded", () => {
+				document.addEventListener('keydown', function(e) {
+					if ((e.ctrlKey || e.metaKey) && [66, 73, 85, 76].indexOf(e.keyCode) > -1) {
+						var keyCode = e.keyCode;
+						var focused = document.activeElement;
+						var id = focused.id;
+						e.preventDefault();
+						if (keyCode == 66) {
+							insertFormating(focused, "**", "bold");
+						} else if (keyCode == 73) {
+							insertFormating(focused, "__", "italic");
+						} else if (keyCode == 85) {
+							insertFormating(focused, "++", "underline");
+						} else if (keyCode == 76) {
+							insertFormating(focused, "[", "link title", "](http://www.example.com)");
+						}
+					}
+				});
+				function insertFormating(txtarea, text, defaultTxt = "", text2 = "") {
+					var selectStart = txtarea.selectionStart
+					var selectEnd = txtarea.selectionEnd
+					var scrollPos = txtarea.scrollTop;
+					var caretPos = txtarea.selectionStart;
+					var mode = 0; //Adding markdown with selected text
+					var front = (txtarea.value).substring(0, caretPos);
+					var back = (txtarea.value).substring(selectEnd, txtarea.value.length);
+					var middle = (txtarea.value).substring(caretPos, selectEnd);
+
+					if (text2 == "") {
+						text2 = text;
+					}
+					var textLen = text.length;
+					var text2Len = text2.length;
+
+					if (selectStart === selectEnd) {
+						middle = defaultTxt;
+						mode = 1; //Adding markdown with default text
+					} else {
+						if (front.substr(-textLen) == text && back.substr(0, text2Len) == text2) {
+							front = front.substring(0, front.length - textLen);
+							back = back.substring(text2Len, back.length);
+							text = "";
+							text2 = "";
+							mode = 2; //Removing markdown with selected text eg. **<selected>bold<selected>**
+						} else if (middle.substr(0, textLen) == text && middle.substr(-text2Len) == text2) {
+							middle = middle.substring(textLen, middle.length - text2Len);
+							text = "";
+							text2 = "";
+							mode = 3; //Removing markdown with selected text eg. <selected>**bold**<selected>
+						}
+					}
+					txtarea.value = front + text + middle + text2 + back;
+					if (selectStart !== selectEnd) {
+						if (mode === 0) {
+							txtarea.selectionStart = selectStart + textLen;
+							txtarea.selectionEnd = selectEnd + textLen;
+						} else if (mode === 2) {
+							txtarea.selectionStart = selectStart - textLen;
+							txtarea.selectionEnd = selectEnd - textLen;
+						} else if (mode === 3) {
+							txtarea.selectionStart = selectStart;
+							txtarea.selectionEnd = selectEnd - textLen - text2Len;
+						}
+					} else {
+						txtarea.selectionStart = selectStart + textLen;
+						txtarea.selectionEnd = txtarea.selectionStart + middle.length;
+					}
+					txtarea.focus();
+					txtarea.scrollTop = scrollPos;
+				}
+			});
 		</script>
 		<link href="/css/icons.css" rel="stylesheet">
 	</body>
