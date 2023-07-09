@@ -18,7 +18,7 @@ func changeCollectionDescriptionFieldLength(db *datastore) error {
 	}
 
 	if db.driverName == driverMySQL {
-		_, err = t.Exec(`ALTER TABLE collections MODIFY COLLUMN description VARCHAR(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`)
+		_, err = t.Exec(`ALTER TABLE collections MODIFY description VARCHAR(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`)
 		if err != nil {
 			t.Rollback()
 			return err
