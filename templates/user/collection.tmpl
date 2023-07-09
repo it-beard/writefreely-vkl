@@ -41,7 +41,10 @@ textarea.section.norm {
 <div id="collection-options">
 	<div style="text-align:center">
 		<h1><input type="text" name="title" id="title" value="{{.DisplayTitle}}" placeholder="Title" /></h1>
-		<p><textarea name="description" class="section codable" id="description">{{.Description}}</textarea></p>
+		<p>
+			<textarea name="description" class="section codable" id="description">{{.Description}}</textarea>
+			<div style="float: right; margin-top: -15px;" id="counter"></div>
+		</p>
 	</div>
 
 	<div class="option">
@@ -273,6 +276,21 @@ if (matchMedia('(pointer:fine)').matches) {
 	cssEditor.resize(true);
 }
 </script>
+
+<script>
+	const inputField = document.getElementById('description');
+	const counter = document.getElementById('counter');
+	const maxLength = 1000;
+
+	inputField.addEventListener('input', () => {
+		const inputLength = inputField.value.length;
+		counter.textContent = `${inputLength}/${maxLength}`;
+		if (inputLength > maxLength) {
+			inputField.value = inputField.value.slice(0, maxLength);
+			counter.textContent = `${maxLength}/${maxLength}`;
+		}
+	});
+  </script>
 
 {{template "footer" .}}
 {{end}}

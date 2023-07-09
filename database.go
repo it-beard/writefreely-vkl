@@ -825,6 +825,28 @@ func (db *datastore) GetCollection(alias string) (*Collection, error) {
 	return db.GetCollectionBy("alias = ?", alias)
 }
 
+func (db *datastore) GetCollectionsForAnonymousPost(userID int64) ([]*CollectionForAnonymousPost, error) {
+	rows, err := db.Query("SELECT id, title, style_sheet FROM collections WHERE owner_id = ?", userID)
+	if err != nil {
+		log.Error("Failed selecting from collections: %v", err)
+		return nil, impart.HTTPError{http.StatusInternalServerError, "Couldn't retrieve collections."}
+	}
+	defer rows.Close()
+
+	collections := []*CollectionForAnonymousPost{}
+	for rows.Next() {
+		c := &CollectionForAnonymousPost{}
+		err := rows.Scan(&c.ID, &c.Title, &c.StyleSheet)
+		if err != nil {
+			log.Error("Failed run GetCollectionsForAnonymousPost() row: %v", err)
+			break
+		}
+		collections = append(collections, c)
+	}
+
+	return collections, nil
+}
+
 func (db *datastore) GetCollectionForPad(alias string) (*Collection, error) {
 	c := &Collection{Alias: alias}
 

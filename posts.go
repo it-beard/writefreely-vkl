@@ -467,17 +467,25 @@ func handleViewPost(app *App, w http.ResponseWriter, r *http.Request) error {
 		}
 	} else {
 		var err error
+		var collections []*CollectionForAnonymousPost
+		collections, errorCollections := app.db.GetCollectionsForAnonymousPost(ownerID.Int64)
+		if errorCollections != nil {
+			return errorCollections
+		}
+
 		page := struct {
 			*AnonymousPost
 			page.StaticPage
-			Username string
-			IsOwner  bool
-			SiteURL  string
-			Silenced bool
+			Username    string
+			IsOwner     bool
+			SiteURL     string
+			Silenced    bool
+			Collections []*CollectionForAnonymousPost
 		}{
 			AnonymousPost: post,
 			StaticPage:    pageForReq(app, r),
 			SiteURL:       app.cfg.App.Host,
+			Collections:   collections,
 		}
 		if u = getUserSession(app, r); u != nil {
 			page.Username = u.Username

@@ -115,6 +115,12 @@ type (
 
 		isAuthorized bool
 	}
+
+	CollectionForAnonymousPost struct {
+		ID         int64  `datastore:"id" json:"-"`
+		Title      string `datastore:"title" schema:"title" json:"title"`
+		StyleSheet string `datastore:"style_sheet" schema:"style_sheet" json:"style_sheet"`
+	}
 )
 
 func (sc *SubmittedCollection) FediverseHandle() string {
@@ -293,6 +299,10 @@ func (c *Collection) DisplayTitle() string {
 }
 
 func (c *Collection) StyleSheetDisplay() template.CSS {
+	return template.CSS(c.StyleSheet)
+}
+
+func (c *CollectionForAnonymousPost) StyleSheetDisplay() template.CSS {
 	return template.CSS(c.StyleSheet)
 }
 
