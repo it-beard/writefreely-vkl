@@ -18,14 +18,14 @@ func changeCollectionDescriptionFieldLength(db *datastore) error {
 	}
 
 	if db.driverName == driverMySQL {
-		_, err = t.Exec("ALTER TABLE collections MODIFY description VARCHAR(1000);")
+		_, err = t.Exec(`ALTER TABLE collections MODIFY description VARCHAR(1000);`)
 		if err != nil {
 			t.Rollback()
 			return err
 		}
 	} else {
 		// Stab for SQLite
-		_, err = t.Exec("SELECT 1;")
+		_, err = t.Exec(`SELECT 1;`)
 		if err != nil {
 			t.Rollback()
 			return err
