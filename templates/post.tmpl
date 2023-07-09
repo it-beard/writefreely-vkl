@@ -55,16 +55,16 @@
 					</h1>
 				</div>
 				<nav id="user-nav">
-					<span class="views{{if not .IsOwner}} owner-visible{{end}}" dir="ltr">Праглядаў: <strong>{{largeNumFmt .Views}}</strong></span>
 					{{if .IsCode}}<a href="/{{.ID}}.txt" rel="noindex" dir="{{.Direction}}">Праглядзець зыходнік</a>{{end}}
 					{{ if .Username }}
 					{{if .IsOwner}}
-					<a href="/{{if .SingleUser}}d/{{end}}{{.ID}}/edit" dir="{{.Direction}}">Рэдагаваць</a>
+						<a href="/me/c/">Мае блогі</a>
+						<a href="/{{if .SingleUser}}d/{{end}}{{.ID}}/edit" dir="{{.Direction}}">Рэдагаваць</a>
 					{{end}}
 					<a class="xtra-feature dash-nav" href="/me/posts/" dir="{{.Direction}}">Чарнавікі</a>
 					{{ end }}
 					{{if .IsOwner}} 
-					<div style="display: inline-block; margin-left: 2em;">
+					<div style="display: inline-block; margin-left: 1em;">
 						<span>Прымяніць стыль:</span>
 						<select id="css_selector">
 							{{range $i, $el := .Collections}}
@@ -72,6 +72,7 @@
 							{{ end }}
 						</select>
 					</div>
+					<span class="views{{if not .IsOwner}} owner-visible{{end}}" dir="ltr">Праглядаў: <strong>{{largeNumFmt .Views}}</strong></span>
 					{{ end }}
 				</nav>
 			</nav>
