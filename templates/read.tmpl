@@ -1,20 +1,17 @@
-{{define "head"}}<title>Стужка - {{.SiteName}}</title>
-		
-		<link rel="alternate" type="application/rss+xml" title="{{.SiteName}} Reader" href="/read/feed/" />
-		{{if gt .CurrentPage 1}}<link rel="prev" href="{{.PrevPageURL .CurrentPage}}">{{end}}
-		{{if lt .CurrentPage .TotalPages}}<link rel="next" href="{{.NextPageURL .CurrentPage}}">{{end}}
-
-		<meta name="description" content="Read the latest posts from {{.SiteName}}.">
-		<meta itemprop="name" content="{{.SiteName}} Reader">
-		<meta itemprop="description" content="Read the latest posts from {{.SiteName}}.">
-		<meta name="twitter:card" content="summary_large_image">
-		<meta name="twitter:title" content="{{.SiteName}} Reader">
-		<meta name="twitter:description" content="Read the latest posts from {{.SiteName}}.">
-		<meta property="og:title" content="{{.SiteName}} Reader" />
-		<meta property="og:type" content="object" />
-		<meta property="og:description" content="Read the latest posts from {{.SiteName}}." />
-
-		<style>
+{{define "head"}}<title>{{.SiteName}}</title>
+	<link rel="alternate" type="application/rss+xml" title="{{.SiteName}}" href="/read/feed/" />
+	{{if gt .CurrentPage 1}}<link rel="prev" href="{{.PrevPageURL .CurrentPage}}">{{end}}
+	{{if lt .CurrentPage .TotalPages}}<link rel="next" href="{{.NextPageURL .CurrentPage}}">{{end}}
+	<meta name="description" content="Read the latest posts from {{.SiteName}}.">
+	<meta itemprop="name" content="{{.SiteName}} Reader">
+	<meta itemprop="description" content="Read the latest posts from {{.SiteName}}.">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="{{.SiteName}} Reader">
+	<meta name="twitter:description" content="Read the latest posts from {{.SiteName}}.">
+	<meta property="og:title" content="{{.SiteName}} Reader" />
+	<meta property="og:type" content="object" />
+	<meta property="og:description" content="Read the latest posts from {{.SiteName}}." />
+	<style>
 		.heading h1 {
 			font-weight: 300;
 			text-align: center;
@@ -82,9 +79,9 @@
 		}
 
 		div.dt-published {
-			display: inline;
-			text-transform: lowercase;
-			color: #8b8b8b;
+		display: inline;
+		text-transform: lowercase;
+		color: #8b8b8b;
 			border-radius: 3px;
 		}
 
@@ -119,13 +116,15 @@
 		h2.post-title {
 			margin-bottom: .50em !important;
 		}
-		</style>
+	</style>
 {{end}}
 {{define "body-attrs"}}id="collection"{{end}}
 {{define "content"}}
 	<div class="content-container snug">
 		{{if not .Chorus }}<h1>{{.ContentTitle}}</h1>{{end}}
-		<p{{if .SelTopic}} style="text-align:center"{{end}}>{{if .SelTopic}}#{{.SelTopic}} posts{{else}}{{.Content}}{{end}}</p>
+		<p{{if .SelTopic}} style="text-align:center"{{end}}>
+			{{if .SelTopic}}#{{.SelTopic}} posts{{else}}{{.Content}}{{end}}
+		</p>
 	</div>
 		<div id="wrapper">
 		{{ if gt (len .Posts) 0 }}
@@ -157,7 +156,6 @@
 			{{if .Excerpt}}<div class="p-summary" {{if .Language}}lang="{{.Language.String}}"{{end}} dir="{{.Direction}}">{{.Excerpt}}</div>
 		
 			<a class="read-more" href="{{if .Collection}}{{.Collection.CanonicalURL}}{{.Slug.String}}{{else}}{{.CanonicalURL .Host}}.md{{end}}">Чытаць далей...</a>{{else}}<div class="e-content preview" {{if .Language}}lang="{{.Language.String}}"{{end}} dir="{{.Direction}}">{{ if not .HTMLContent }}<p id="post-body" class="e-content preview">{{.Content}}</p>{{ else }}{{.HTMLContent}}{{ end }}<div class="over">&nbsp;</div></div>
-			
 			<a class="read-more maybe" href="{{if .Collection}}{{.Collection.CanonicalURL}}{{.Slug.String}}{{else}}{{.CanonicalURL .Host}}.md{{end}}">Чытаць далей...</a>{{end}}</article>
 			{{end}}
 		</section>
@@ -173,21 +171,21 @@
 		</nav>{{end}}
 
 		</div>
-		<script src="/js/localdate.js">
-<script type="text/javascript">
-(function() {
-	var $articles = document.querySelectorAll('article');
-	for (var i=0; i<$articles.length; i++) {
-		var $art = $articles[i];
-		var $more = $art.querySelector('.read-more.maybe');
-		if ($more != null) {
-			if ($art.querySelector('.e-content.preview').clientHeight < 180) {
-				$more.parentNode.removeChild($more);
-				var $overlay = $art.querySelector('.over');
-				$overlay.parentNode.removeChild($overlay);
+		<script src="/js/localdate.js"> </script>
+		<script type="text/javascript">
+		(function() {
+			var $articles = document.querySelectorAll('article');
+			for (var i=0; i<$articles.length; i++) {
+				var $art = $articles[i];
+				var $more = $art.querySelector('.read-more.maybe');
+				if ($more != null) {
+					if ($art.querySelector('.e-content.preview').clientHeight < 180) {
+						$more.parentNode.removeChild($more);
+						var $overlay = $art.querySelector('.over');
+						$overlay.parentNode.removeChild($overlay);
+					}
+				}
 			}
-		}
-	}
-})();
-</script>
+		})();
+		</script>
 {{end}}
