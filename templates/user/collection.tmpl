@@ -283,11 +283,18 @@ if (matchMedia('(pointer:fine)').matches) {
 	const maxLength = 1000;
 
 	inputField.addEventListener('input', () => {
-		const inputLength = inputField.value.length;
+		let inputValue = inputField.value;
+		let newLines = (inputValue.match(/\n/g) || []).length;
+		let inputLength = inputValue.length + newLines; 
+
 		counter.textContent = `${inputLength}/${maxLength}`;
+
 		if (inputLength > maxLength) {
-			inputField.value = inputField.value.slice(0, maxLength);
-			counter.textContent = `${maxLength}/${maxLength}`;
+			inputField.value = inputValue.slice(0, maxLength - newLines);
+			inputValue = inputField.value;
+			newLines = (inputValue.match(/\n/g) || []).length;
+			inputLength = inputValue.length + newLines;
+			counter.textContent = `${inputLength}/${maxLength}`;
 		}
 	});
   </script>
