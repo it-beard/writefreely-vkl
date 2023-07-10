@@ -1,10 +1,10 @@
-{{define "collection"}}<!DOCTYPE HTML>
+{{define "collection"}}
+<!-- Blog feed page -->
+<!DOCTYPE HTML>
 <html {{if .Language}}lang="{{.Language}}"{{end}} dir="{{.Direction}}">
 	<head>
 		<meta charset="utf-8">
-
-		<title>{{.DisplayTitle}}{{if not .SingleUser}} &mdash; {{.SiteName}}{{end}}</title>
-		
+		<title>{{.DisplayTitle}}{{if not .SingleUser}} &mdash; {{.SiteName}}{{end}}</title>	
 		<link rel="stylesheet" type="text/css" href="/css/write.css" />
 		{{if .CustomCSS}}<link rel="stylesheet" type="text/css" href="/local/custom.css" />{{end}}
 		<link rel="shortcut icon" href="/favicon.ico" />
@@ -13,7 +13,6 @@
 		{{if lt .CurrentPage .TotalPages}}<link rel="next" href="{{.NextPageURL .Prefix .CurrentPage .IsTopLevel}}">{{end}}
 		{{if not .IsPrivate}}<link rel="alternate" type="application/rss+xml" title="{{.DisplayTitle}} &raquo; Feed" href="{{.CanonicalURL}}feed/" />{{end}}
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
 		<meta name="generator" content="WriteFreely">
 		<meta name="description" content="{{.Description}}">
 		<meta itemprop="name" content="{{.DisplayTitle}}">
@@ -29,37 +28,40 @@
 		<meta property="og:description" content="{{.Description}}" />
 		<meta property="og:image" content="{{.AvatarURL}}">
 		{{template "collection-meta" .}}
-		{{if .StyleSheet}}<style type="text/css">{{.StyleSheetDisplay}}</style>{{end}}
-	<style type="text/css">
-body#collection header {
-	max-width: 40em;
-	margin: 1em auto;
-    text-align: center;
-	padding: 0;
-}
-body#collection header.multiuser {
-    max-width: 100%;
-    margin: 1em;
-    text-align: left;
-}
-body#collection header nav:not(.pinned-posts) {
-	display: inline;
-}
-body#collection header nav.dropdown-nav,
-body#collection header nav.tabs,
-body#collection header nav.tabs a:first-child {
-	margin: 0 0 0 1em;
-}
-	</style>
+		{{if .StyleSheet}}
+			<style type="text/css">{{.StyleSheetDisplay}}</style>
+		{{end}}
+		<style type="text/css">
+			body#collection header {
+				max-width: 40em;
+				margin: 1em auto;
+				text-align: center;
+				padding: 0;
+			}
+			body#collection header.multiuser {
+				max-width: 100%;
+				margin: 1em;
+				text-align: left;
+			}
+			body#collection header nav:not(.pinned-posts) {
+				display: inline;
+			}
+			body#collection header nav.dropdown-nav,
+			body#collection header nav.tabs,
+			body#collection header nav.tabs a:first-child {
+				margin: 0 0 0 1em;
+			}
 
+			div#welcome {
+				padding: 0 2em;
+			}
+		</style>
 		{{if .RenderMathJax}}
 		  <!-- Add mathjax logic -->
 		  {{template "mathjax" .}}
 		{{end}}
-
 		<!-- Add highlighting logic -->
 		{{template "highlighting" . }}
-
 	</head>
 	<body id="collection" itemscope itemtype="http://schema.org/WebPage">
 		{{template "user-navigation" .}}
@@ -68,28 +70,42 @@ body#collection header nav.tabs a:first-child {
 			{{template "user-silenced"}}
 		{{end}}
 		<header>
-		<h1 dir="{{.Direction}}" id="blog-title"><a href="/{{if .IsTopLevel}}{{else}}{{.Prefix}}{{.Alias}}/{{end}}" class="h-card p-author u-url" rel="me author">{{.DisplayTitle}}</a></h1>
-		{{if .Description}}<p class="description p-note">{{.DisplayDescription}}</p>{{end}}
-		{{/*if not .Public/*}}
-			<!--p class="meta-note"><span>Private collection</span>. Only you can see this page.</p-->
-		{{/*end*/}}
-		{{if .PinnedPosts}}<nav class="pinned-posts">
-			{{range .PinnedPosts}}<a class="pinned" href="{{if not $.SingleUser}}/{{$.Alias}}/{{.Slug.String}}{{else}}{{.CanonicalURL $.Host}}{{end}}">{{.PlainDisplayTitle}}</a>{{end}}</nav>
-		{{end}}
+			<h1 dir="{{.Direction}}" id="blog-title">
+				<a href="/{{if .IsTopLevel}}{{else}}{{.Prefix}}{{.Alias}}/{{end}}" 
+					class="h-card p-author u-url" rel="me author">
+					{{.DisplayTitle}}
+				</a>
+			</h1>
+			{{if .Description}}
+				<p class="description p-note">{{.DisplayDescription}}</p>
+			{{end}}
+			{{if .PinnedPosts}}
+				<nav class="pinned-posts">
+					{{range .PinnedPosts}}
+						<a class="pinned" href="{{if not $.SingleUser}}/{{$.Alias}}/{{.Slug.String}}{{else}}{{.CanonicalURL $.Host}}{{end}}">
+							{{.PlainDisplayTitle}}
+						</a>
+					{{end}}
+				</nav>
+			{{end}}
 		</header>
 		
-		{{if .Posts}}<section id="wrapper" itemscope itemtype="http://schema.org/Blog">{{else}}<div id="wrapper">{{end}}
-
-			{{if .IsWelcome}}
-			<div id="welcome">
-				<h2>Welcome, <strong>{{.Username}}</strong>!</h2>
-				<p>This is your new blog.</p>
-				<p><a class="simple-cta" href="/#{{.Alias}}">Start writing</a>, or <a class="simple-cta" href="/me/c/{{.Alias}}">customize</a> your blog.</p>
-				<p>Check out our <a class="simple-cta" href="https://guides.write.as/writing/?pk_campaign=welcome">writing guide</a> to see what else you can do, and <a class="simple-cta" href="/contact">get in touch</a> anytime with questions or feedback.</p>
-			</div>
+		{{if .Posts}}
+			{{if eq (len .Posts) 0}}
+				<div id="welcome">
+					<h2>Вітаем вас, <strong>{{.Username}}</strong>!</h2>
+					<p>
+						Гэта ваш новы блог. <a class="simple-cta" href="/new/{{.Alias}}">Пачынай пісаць</a>, ці <a class="simple-cta" href="/me/c/{{.Alias}}">наладзьце</a> свой блог.
+						Таксама, азнаёмціся <a class="simple-cta" href="https://guides.write.as/writing/?pk_campaign=welcome" target="_blank">інструкцыю для аўтараў</a>, каб даведацца пра ўсе магчымасці нашага сервіса!
+					</p>
+				</div>
 			{{end}}
+			<section id="wrapper" itemscope itemtype="http://schema.org/Blog">
+		{{else}}
+			<div id="wrapper">
+		{{end}}
 
-			{{template "posts" .}}
+		{{template "posts" .}}
 
 		{{if gt .TotalPages 1}}<nav id="paging" class="content-container clearfix">
 			{{if or (and .Format.Ascending (le .CurrentPage .TotalPages)) (isRTL .Direction)}}

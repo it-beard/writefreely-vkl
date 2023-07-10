@@ -1,19 +1,18 @@
-{{define "post"}}<!DOCTYPE HTML>
+{{define "post"}}
+<!-- Draft page -->
+<!DOCTYPE HTML>
 <html {{if .Language}}lang="{{.Language}}"{{end}} dir="{{.Direction}}">
 	<head prefix="og: http://ogp.me/ns#">
 		<meta charset="utf-8">
-
 		<title>{{if .Title}}{{.Title}}{{else}}{{.GenTitle}}{{end}} {{localhtml "title dash" .Language}} {{.SiteName}}</title>
-		
 		{{if .IsCode}}
-		<link rel="stylesheet" href="/css/lib/mono-blue.min.css">
+			<link rel="stylesheet" href="/css/lib/mono-blue.min.css">
 		{{end}}
 		<link rel="stylesheet" type="text/css" href="/css/write.css" />
 		{{if .CustomCSS}}<link rel="stylesheet" type="text/css" href="/local/custom.css" />{{end}}
 		<link rel="shortcut icon" href="/favicon.ico" />
 		<link rel="canonical" href="{{.Host}}/{{if .SingleUser}}d/{{end}}{{.ID}}" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
 		<meta name="generator" content="{{.SiteName}}">
 		<meta name="title" content="{{if .Title}}{{.Title}}{{else}}{{.GenTitle}}{{end}}">
 		<meta name="description" content="{{.Description}}">

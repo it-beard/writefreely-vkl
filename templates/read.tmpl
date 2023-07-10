@@ -1,4 +1,6 @@
-{{define "head"}}<title>{{.SiteName}}</title>
+{{define "head"}}
+	<!-- Main page -->
+	<title>{{.SiteName}}</title>
 	<link rel="alternate" type="application/rss+xml" title="{{.SiteName}}" href="/read/feed/" />
 	{{if gt .CurrentPage 1}}<link rel="prev" href="{{.PrevPageURL .CurrentPage}}">{{end}}
 	{{if lt .CurrentPage .TotalPages}}<link rel="next" href="{{.NextPageURL .CurrentPage}}">{{end}}

@@ -605,7 +605,6 @@ type CollectionPage struct {
 	page.StaticPage
 	*DisplayCollection
 	IsCustomDomain bool
-	IsWelcome      bool
 	IsOwner        bool
 	IsCollLoggedIn bool
 	CanPin         bool
@@ -853,7 +852,6 @@ func handleViewCollection(app *App, w http.ResponseWriter, r *http.Request) erro
 		IsCollLoggedIn:    cr.isAuthorized,
 		StaticPage:        pageForReq(app, r),
 		IsCustomDomain:    cr.isCustomDomain,
-		IsWelcome:         r.FormValue("greeting") != "",
 		CollAlias:         c.Alias,
 	}
 	displayPage.IsAdmin = u != nil && u.IsAdmin()
