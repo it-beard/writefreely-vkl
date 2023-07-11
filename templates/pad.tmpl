@@ -11,8 +11,9 @@
 	</head>
 	<body id="pad" class="light">
 		<div id="overlay"></div>
-		<textarea id="writer" placeholder="Мой новы допіс..." class="{{.Post.Font}}" autofocus>{{if .Post.Title}}# {{.Post.Title}}{{end}}{{.Post.Content}}</textarea>
+		<textarea id="writer" placeholder="Мой новы допіс..." class="{{.Post.Font}}" autofocus>{{if .Post.Title}}# {{.Post.Title}}
 
+{{end}}{{.Post.Content}}</textarea>
 		<div class="alert success hidden" id="edited-elsewhere">
 			Гэты допіс быў абноўлена ў іншым месцы пасля вашай апошняй публікацыі! 
 			<a href="#" id="erase-edit">Выдаліць чарнавік і перазагрузіць старонку</a>.

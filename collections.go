@@ -1123,7 +1123,7 @@ func existingCollection(app *App, w http.ResponseWriter, r *http.Request) error 
 		}{}, http.StatusOK)
 	}
 
-	addSessionFlash(app, w, r, "Blog updated!", nil)
+	addSessionFlash(app, w, r, "Налады абноўлены!", nil)
 	return impart.HTTPError{http.StatusFound, "/me/c/" + collAlias}
 }
 

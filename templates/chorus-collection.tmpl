@@ -1,7 +1,7 @@
 {{define "collection"}}
 <!-- Blog feed page -->
 <!DOCTYPE HTML>
-<html {{if .Language}}lang="{{.Language}}"{{end}} dir="{{.Direction}}">
+<html>
 	<head>
 		<meta charset="utf-8">
 		<title>{{.DisplayTitle}}{{if not .SingleUser}} &mdash; {{.SiteName}}{{end}}</title>	
@@ -32,18 +32,6 @@
 			<style type="text/css">{{.StyleSheetDisplay}}</style>
 		{{end}}
 		<style type="text/css">
-			body#collection header {
-				max-width: 40em;
-				margin: 1em auto;
-				text-align: center;
-				padding: 0;
-			}
-			body#collection header.multiuser {
-				max-width: 100%;
-				margin: 1em;
-				text-align: left;
-			}
-
 			div#welcome {
 				padding: 0 2em;
 			}
@@ -69,7 +57,7 @@
 				</a>
 			</h1>
 			{{if .Description}}
-				<p class="description p-note">{{.DisplayDescription}}</p>
+				<div class="description p-note">{{.DisplayDescription}}</div>
 			{{end}}
 			{{if .PinnedPosts}}
 				<nav class="pinned-posts">

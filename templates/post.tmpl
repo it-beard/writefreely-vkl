@@ -1,7 +1,7 @@
 {{define "post"}}
 <!-- Draft page -->
 <!DOCTYPE HTML>
-<html {{if .Language}}lang="{{.Language}}"{{end}} dir="{{.Direction}}">
+<html>
 	<head prefix="og: http://ogp.me/ns#">
 		<meta charset="utf-8">
 		<title>{{if .Title}}{{.Title}}{{else}}{{.GenTitle}}{{end}} {{localhtml "title dash" .Language}} {{.SiteName}}</title>
@@ -45,7 +45,7 @@
 		<!-- Add highlighting logic -->
 		{{template "highlighting" .}}
 	</head>
-	<body id="post">
+	<body id="post" class="post-draft">
 		<header class="multiuser">
 			<nav id="full-nav">
 				<div class="left-side">
@@ -63,7 +63,7 @@
 					<a class="xtra-feature dash-nav" href="/me/posts/" dir="{{.Direction}}">Чарнавікі</a>
 					{{ end }}
 					{{if .IsOwner}} 
-					<div style="display: inline-block; margin-left: 1em;">
+					<div class="apply-style">
 						<span>Прымяніць стыль:</span>
 						<select id="css_selector">
 							{{range $i, $el := .Collections}}
@@ -71,7 +71,7 @@
 							{{ end }}
 						</select>
 					</div>
-					<span class="views{{if not .IsOwner}} owner-visible{{end}}" dir="ltr">Праглядаў: <strong>{{largeNumFmt .Views}}</strong></span>
+					<span class="draft-views views{{if not .IsOwner}} owner-visible{{end}}" dir="ltr">Праглядаў: <strong>{{largeNumFmt .Views}}</strong></span>
 					{{ end }}
 				</nav>
 			</nav>
