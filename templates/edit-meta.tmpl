@@ -49,9 +49,7 @@
 				</ul></nav>
 			</div>
 			<div id="belt">
-				<div class="tool if-room"><a href="{{if .EditCollection}}{{.EditCollection.CanonicalURL}}{{.Post.Slug}}/edit{{else}}/{{.Post.Id}}/edit{{end}}" title="Да допісу" id="edit"><img class="ic-24dp" src="/img/ic_edit_dark@2x.png" /></a></div>
-				<div class="tool if-room room-2"><a href="#theme" title="Змяніць тэму" id="toggle-theme"><img class="ic-24dp" src="/img/ic_brightness_dark@2x.png" /></a></div>
-				<div class="tool if-room room-1"><a href="/me/posts/" title="Праглядзець допісы" id="view-posts"><img class="ic-24dp" src="/img/ic_list_dark@2x.png" /></a></div>
+				<div class="tool"><a href="{{if .EditCollection}}{{.EditCollection.CanonicalURL}}{{.Post.Slug}}/edit{{else}}/{{.Post.Id}}/edit{{end}}" title="Да допісу" id="edit"><img class="ic-24dp" src="/img/ic_edit_dark@2x.png" /></a></div>
 			</div>
 		</header>
 		
@@ -66,11 +64,11 @@
 
 				<dl class="dl-horizontal">
 					{{if .EditCollection}}
-					<dt><label for="slug">Slug</label></dt>
+					<dt><label for="slug">Прыгожы URL</label></dt>
 					<dd><input type="text" id="slug" name="slug" value="{{.Post.Slug}}" /></dd>
 					{{end}}
-					<dt><label for="lang">Мова</label></dt>
-					<dd>
+					<dt style="display: none;"><label for="lang">Мова</label></dt>
+					<dd style="display: none;">
 						<select name="lang" id="lang" dir="auto" class="inputform">
 							<option value=""></option>
 							<option value="ab"{{if eq "ab" .Post.Language.String}} selected="selected"{{end}}>аҧсуа бызшәа, аҧсшәа</option>
@@ -259,8 +257,8 @@
 							<option value="zu"{{if eq "zu" .Post.Language.String}} selected="selected"{{end}}>isiZulu</option>
 						</select>
 					</dd>
-					<dt><label for="rtl">Напісанне</label></dt>
-					<dd><input type="checkbox" id="rtl" name="rtl" {{if .Post.IsRTL.Bool}}checked="checked"{{end}} /><label for="rtl"> справа налева</label></dd>
+					<dt style="display: none;"><label for="rtl">Напісанне</label></dt>
+					<dd style="display: none;"><input type="checkbox" id="rtl" name="rtl" {{if .Post.IsRTL.Bool}}checked="checked"{{end}} /><label for="rtl"> справа налева</label></dd>
 					<dt><label for="created">Створана</label></dt>
 					<dd>
 						<input type="text" id="created" name="created" value="{{.Post.UserFacingCreated}}" data-time="{{.Post.Created8601}}" placeholder="YYYY-MM-DD HH:MM:SS" maxlength="19" /> <span id="tz">UTC</span> <a href="#" class="meta-link" id="set-now">зараз</a>

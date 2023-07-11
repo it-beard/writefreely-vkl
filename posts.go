@@ -780,7 +780,7 @@ func existingPost(app *App, w http.ResponseWriter, r *http.Request) error {
 		return impart.WriteSuccess(w, pRes, http.StatusOK)
 	}
 
-	addSessionFlash(app, w, r, "Changes saved.", nil)
+	addSessionFlash(app, w, r, "Змяненні захаваны.", nil)
 	collectionAlias := vars["alias"]
 	redirect := "/" + postID + "/meta"
 	if collectionAlias != "" {

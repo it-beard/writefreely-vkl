@@ -1,3 +1,6 @@
+html {
+	font-size: 16px;
+}
 body {
 	font-family: @robotoFont;
 	font-size-adjust: 0.5;
@@ -181,10 +184,6 @@ body {
 			}
 		}
 		header {
-			padding: 0 1em;
-			text-align: center;
-			max-width: 50em;
-			margin: 3em auto 4em;
 
 			.writeas-prefix {
 				a {
@@ -194,7 +193,7 @@ body {
 				margin-bottom: 0.5em;
 			}
 			nav {
-				a:first-child {
+				a.pinned:first-child {
 					margin: 0;
 				}
 			}
@@ -252,7 +251,7 @@ body {
 				}
 			}
 			time {
-				font-size: 1.1em;
+				font-size: 1em;
 
 				&+p {
 					margin-top: 0.25em;
@@ -846,7 +845,7 @@ input {
 #beta, .content-container {
 	max-width: 50em;
 	margin: 0 auto 3em;
-	font-size: 1.2em;
+	font-size: 1em;
 
 	&.tight {
 		max-width: 30em;
@@ -1000,7 +999,7 @@ div.blurbs {
 	}
 }
 footer.contain-me {
-	font-size: 1.1em;
+	font-size: 1em;
 }
 #official-writing, #wrapper {
 	h2, h3, h4 {
@@ -1129,7 +1128,7 @@ ul.errors {
 	}
 	li.info {
 		list-style: none;
-		font-size: 1.1em;
+		font-size: 1em;
 		text-align: center;
 	}
 }
@@ -1156,7 +1155,7 @@ body#pad-sub #posts, .atoms {
 		}
 		.electron {
 			font-weight: normal;
-			font-size: 0.86em;
+			font-size: 1em;
 			margin-left: 0.75rem;
 		}
 	}
@@ -1181,10 +1180,10 @@ body#pad-sub #posts, .atoms {
 	}
 	#more-posts p {
 		text-align: center;
-		font-size: 1.1em;
+		font-size: 1em;
 	}
 	p {
-		font-size: 0.86em;
+		font-size: 1em;
 	}
 	.error {
 		display: inline-block;
@@ -1263,7 +1262,7 @@ header {
 				}
 			}
 			a {
-				font-size: 1.1em;
+				font-size: 1em;
 				font-family: @robotoFont;
 				span {
 					font-size: 0.7em;
@@ -1480,9 +1479,6 @@ div.row {
 			margin-left: 0;
 		}
 	}
-	#beta, .content-container {
-		font-size: 1.15em;
-	}
 }
 
 @media all and (max-width: 600px) {
@@ -1620,7 +1616,7 @@ pre.code-block {
 
 #org-nav {
 	font-family: @robotoFont;
-	font-size: 1.1em;
+	font-size: 1em;
 	color: #888;
 
 	em, strong {
@@ -1640,3 +1636,213 @@ pre.code-block {
 		margin-left: 0.25em;
 	}
 }
+
+footer nav {
+	font-size: 0.86em;
+}
+
+header nav#user-nav a {
+	font-size: 0.94em;
+}
+
+nav#full-nav .right-side {
+	font-size: 0.86em;
+}
+
+nav#full-nav .left-side a:first-child {
+	font-size: 0.86em;
+}
+
+body#post h1#blog-title a,
+body#post h2.post-title,
+body#post footer.footer-post,
+body#collection h1#blog-title a,
+body#collection div.description,
+body#collection a.read-more {
+	font-size: 0.86em;
+}
+
+body#post div.dt-published,
+body#post nav.pinned-posts,
+body#collection div.dt-published,
+body#collection nav.pinned-posts {
+	font-size: 0.9em;
+}
+
+body#collection h2.post-title a.user {
+	font-size: 0.60em;
+}
+
+body#post div.dt-published,
+body#collection div.dt-published {
+	display: block;
+	margin-bottom: 1em;
+	margin-top: 1em;
+	text-transform: lowercase;
+	font-weight: normal;
+	border-radius: 3px;
+	color: #666;
+}
+
+body#post footer.footer-post {
+	margin: 0 auto; max-width: 40rem
+}
+
+body#post nav.pinned-posts a:first-child {
+	margin-left: 0;
+}
+
+body#collection a.read-more {
+	margin-top: 0;
+}
+
+body#collection header {
+	padding: 0 1em;
+	text-align: center;
+	max-width: 50em;
+	margin: 3em auto 4em;
+}
+
+body#collection header.multiuser {
+	max-width: 100%;
+	margin: 1em;
+	text-align: left;
+}
+
+body#collection.reader {
+	.heading h1 {
+		font-weight: 300;
+		text-align: center;
+		margin: 3em 0 0;
+	}
+	.heading p {
+		text-align: center;
+		margin: 1.5em 0 4.5em;
+		font-size: 1em;
+		color: #777;
+	}
+
+	#wrapper div,
+	#wrapper a  {
+		font-family: 'Roboto',sans-serif !important;
+	}
+
+	.preview {
+		max-height: 180px;
+		overflow: hidden;
+		position: relative;
+		margin-top: -0.25em;
+	}
+
+	.preview .over {
+		position: absolute;
+		top: 5em;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&0+0,1+100 */
+		background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%); /* FF3.6-15 */
+		background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* Chrome10-25,Safari5.1-6 */
+		background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+	}
+	
+	a.read-more {
+		margin-top: 1em;
+	}
+
+	article {
+		border-bottom: 1.5px solid #f7f4f4;
+		padding: 2em 0;
+		margin-bottom: 0em !important;
+		max-width: 40em;
+
+		&:last-child {
+			border-bottom: none;
+			margin-bottom: 0em;
+			padding-bottom: 0;
+		}
+	
+		&:first-child {
+			border-top: 1.5px solid #f7f4f4;
+			padding-top: 2em;
+		}
+
+		p {
+			margin-bottom: 0em;
+		}
+	
+		p.source {
+			margin-bottom: 0;
+			display: inline;
+		}
+	
+		.delimiter {
+			color: #a4a1a1;
+			padding: 0 0.2em;
+			display: inline-block;
+			font-size: 0.86em;
+		}
+	
+		h2.post-title {
+			margin-bottom: .50em !important;
+		}
+
+		h2.post-title a {
+		font-size: 0.88em;
+		}
+	
+		.dt-published {
+			display: inline-block;
+			margin-bottom: 0;
+			margin-top: 0;
+		}
+	
+		p.source-one-line {
+			margin-bottom: 0;
+			margin-top: 0;
+			display: inline-block;
+			font-size: 0.86em;
+		}
+	}
+
+	.attention-box {
+		text-align: center;
+		font-size: 1em;
+	}
+	.attention-box hr { margin: 4rem auto; }
+	hr { max-width: 40rem; }
+	header {
+		padding: 0 !important;
+		text-align: left !important;
+		margin: 1em !important;
+		max-width: 100% !important;
+	}
+	header nav#user-nav {
+		margin-left: 0 !important;
+	}
+}
+
+#post .apply-style {
+	font-size: 0.86em;
+	display: inline-block; 
+	margin-left: 1em;
+
+	select {
+		font-size: 1em;
+	}
+}
+
+html #post .draft-views {
+	font-size: 0.86em;
+}
+
+html body#pad,
+html body#pad-sub header {
+	font-size: 0.86em;
+}
+
+html body#pad span#wc {
+	font-size: 0.9em;
+}
+

@@ -239,7 +239,7 @@ body#pad-sub {
 			}
 			&.status {
 				text-align: center;
-				font-size: 1.1em;
+				font-size: 1em;
 				&:first-child {
 					margin-top: 1.5em;
 				}
@@ -372,7 +372,7 @@ body#pad .alert {
 	bottom: 0.25em;
 	left: 2em;
 	right: 2em;
-	font-size: 1.1em;
+	font-size: 1em;
 
 	&#edited-elsewhere {
 		&.hidden {
@@ -428,6 +428,30 @@ body#pad .alert {
 	body#pad #tools .tool.if-room, body#pad-sub #tools .tool.if-room, .if-room {
 		display: none;
 	}
+
+	body#pad #title, body#pad textarea {
+		top: 5em;
+	}
+
+	body#pad header {
+		height: 3.6em;
+	}
+
+	body#pad #tools nav#target {
+		display: block;
+		margin-top: -2.15em;
+		margin-left: 2em;
+	}
+
+	body#pad #tools nav#font-picker {
+		margin-left: 0;
+	}
+
+	body#pad #tools div#belt {
+		float: none;
+		margin-top: -2.2em;
+		text-align: right;
+	}
 }
 
 @media all and (max-width: 600px) {
@@ -446,10 +470,10 @@ body#pad .alert {
 		}
 	}
 	header nav#user-nav a {
-		font-size: 1em;
+		font-size: 0.86em;
 	}
 	#target-name {
-		max-width: 98px;
+		max-width: 200px;
 		display: inline-block;
 	}
 	nav#full-nav .right-side {
