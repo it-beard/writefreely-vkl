@@ -59,7 +59,191 @@ go build -v -tags='sqlite' ./cmd/writefreely/
 
 Цяпер вы можаце запусціць WriteFreely! Але вам спатрэбіцца яшчэ адзін крок, каб стварыць некаторыя ассэты і паспяхова запусціць свой лакальны інстанс.
 
-### Канфігураванне (будзе дапоўнена)
-### Запуск (будзе дапоўнена)
+### Першы запуск
+#### Кампіляцыя асетаў
+Папершае, трэба скампіліраваць праз Node.js LESS-файлы, каб атрымаць выніковыя стылявыя css-файлы. Для гэтага патрабуецца LESS-кампілятар:
+```
+npm install -g less
+```
+Далей камілюем less, і кладзем вынікі ў папку `static/css/`:
+```
+cd less
+export CSSDIR=../static/css/
+lessc app.less --clean-css="--s1 --advanced" $CSSDIR/write.css
+lessc fonts.less --clean-css="--s1 --advanced" $CSSDIR/fonts.css
+lessc icons.less --clean-css="--s1 --advanced" $CSSDIR/icons.css
+```
+
+#### Канфігураванне ды першы запуск
+Канфігураванне робіцца адзін раз, у выніку чаго будзе створаны файл `config.ini`. Менавіта ў ім знаходзяцца ўсялякія налады, у тым ліку налады MySQL і Let's Encrypt.
+
+Стварыць пусты `config.ini` можна камандай:
+```
+./writefreely config generate
+```
+
+Стварыць `config.ini` праз кансольны аўтаканфігуратар можна камандай: 
+```
+./writefreely config start
+```
+
+Прыкладна так выглядае `config.ini` letapis.vkl.world, за выключэнням налад базы дадзеных і сертыфікатаў Let's Encrypt (вельмі раю наладзіць свой `config.ini` прыкладна такжа, каб пазбегнуць памылак рантайма):
+```ini
+[server]
+hidden_host          = 
+port                 = 8080
+bind                 = localhost
+tls_cert_path        = 
+tls_key_path         = 
+autocert             = false
+templates_parent_dir = 
+static_parent_dir    = 
+pages_parent_dir     = 
+keys_parent_dir      = 
+hash_seed            = 
+gopher_port          = 0
+
+[database]
+type     = sqlite3
+filename = writefreely.db
+username = 
+password = 
+database = writefreely
+host     = localhost
+port     = 3306
+tls      = false
+
+[app]
+site_name             = Летапісы ВКЛ
+site_description      = Летапісы ВКЛ
+host                  = http://localhost:8080
+theme                 = write
+editor                = 
+disable_js            = false
+webfonts              = true
+landing               = 
+simple_nav            = false
+wf_modesty            = true
+chorus                = true
+forest                = false
+disable_drafts        = false
+single_user           = false
+open_registration     = true
+open_deletion         = true
+min_username_len      = 2
+max_blogs             = 3
+federation            = true
+public_stats          = true
+monetization          = false
+notes_only            = false
+private               = false
+local_timeline        = true
+user_invites          = 
+default_visibility    = public
+update_checks         = false
+disable_password_auth = false
+
+[oauth.slack]
+client_id          = 
+client_secret      = 
+team_id            = 
+callback_proxy     = 
+callback_proxy_api = 
+
+[oauth.writeas]
+client_id          = 
+client_secret      = 
+auth_location      = 
+token_location     = 
+inspect_location   = 
+callback_proxy     = 
+callback_proxy_api = 
+
+[oauth.gitlab]
+client_id          = 
+client_secret      = 
+host               = 
+display_name       = 
+callback_proxy     = 
+callback_proxy_api = 
+
+[oauth.gitea]
+client_id          = 
+client_secret      = 
+host               = 
+display_name       = 
+callback_proxy     = 
+callback_proxy_api = 
+
+[oauth.generic]
+client_id          = 
+client_secret      = 
+host               = 
+display_name       = 
+callback_proxy     = 
+callback_proxy_api = 
+token_endpoint     = 
+inspect_endpoint   = 
+auth_endpoint      = 
+scope              = 
+allow_disconnect   = false
+map_user_id        = 
+map_username       = 
+map_display_name   = 
+map_email          = 
+
+```
+
+Далей трэба стварыць прыватныя ключы, якія будуць выкарыстоўвацца для хэшыравання пароляў. **ВАЖНА**: гэтыя ключы ствараюцца адзін раз для бягучай базы дадзеных! Калі вы іх перастворыце, то старыя карыстальнікі страцяць магчымасць лагініцца (праз тое, што старыя паролі хэшыравалісь другімі ключамі). Самі ключы пасля генерацыі будуць знакодзіцца ў папцы `/keys`. Каманда на генерацыю:
+```
+./writefreely keys generate
+```
+
+Калі вы будзеце выкарыстоўваць MySQL у якасці базы дадзеных, то трэба наладзіць яе самастойна (усталяваць і стварыць базу дадзеных, унесці звесті аб ёй у файл `config.ini`. Калі вы абралі карыстацца SQLight, то база створыцца аўтаматычна пры запуску каманды `writefreely config generate`.
+
+Віншую! Цямер вы можаце запусціць лакальны інстанс праз прамы выклік `./writefreely` з кансолі. Ваш сайт будзе даступны па спасылцы `http://localhost:8080/`. 
+
+
+### Другі і наступныя запускі
+Пасля змяненняў кода трэба перакампіляваць код, перкампіляваць less, накаціць міграцыі базы дадзеных і запусціць праект:
+```
+go build -v ./cmd/writefreely/
+cd less
+export CSSDIR=../static/css/
+lessc app.less --clean-css="--s1 --advanced" $CSSDIR/write.css
+lessc fonts.less --clean-css="--s1 --advanced" $CSSDIR/fonts.css
+lessc icons.less --clean-css="--s1 --advanced" $CSSDIR/icons.css
+cd ../
+./writefreely db migrate
+./writefreely
+
+```
+
+### Папкі ды файлы, якія патрэбны для працы аплікацыі (для сервераў)
+Папкі ды файлы, якія нельга чапаць/перазапісваць (ці рабіць гэта пільна):
+
+* `/keys` - сгенераваныя для сервера унікальныя прыватныя ключы
+* `/certs` - папка з сертыфікатамі Let’s Encrypt
+* `config.ini` - файл канфігурацый сервера
+
+Папкі ды файлы, якія трэба замяняць пры змяненні кода:
+
+* `/static` - статычныя асеты (css, выявы, js-скрыпны, шрыфты)
+* `/pages` - шаблоны службовых старонак (Go templates)
+* `/templates` - шаблоны старонак (Go templates)
+* `writefreely` - выканаўчы фай лаплікацыі
+
+### Лакалізацыя
+Лакалізацыя праекту захардкожана у макетах "go templates" (`.tmpl` файлы) і ў go-кодзе. Нажаль, у арыгінальным WriteFreely не было механізмаў лакалізацыі на момант нашага форку, таму жывем з тым, што маем.
+
+### Карысныя спасылкі
+
+* Працуюцы інстанс, сабраны з `mine` галіны гэтага рэпазіторыя - https://letapis.vkl.world
+* [Абмеркаванне праекта](https://github.com/it-beard/writefreely-vkl/discussions)
+* [Бягучы спіс задач на распрацоўку](https://github.com/it-beard/writefreely-vkl/issues)
+* [Арыгінальная інструукцыя па наладах і запуску WriteFreely](https://writefreely.org/docs/latest/developer)
+* [Арыгінальная інструкцыя па запуску на серверах](https://writefreely.org/start)
+* Каб далучыцца да распрацоўкі, пішыце [Аляксею АйЦіБарадзе](https://vkl.world/@itbeard)
+
 
 
