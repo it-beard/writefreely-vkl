@@ -243,11 +243,15 @@ cd ../
 ## Лакалізацыя
 Лакалізацыя праекту захардкожана у макетах "go templates" (`.tmpl` файлы) і ў go-кодзе. Нажаль, у арыгінальным WriteFreely не было механізмаў лакалізацыі на момант нашага форку, таму жывем з тым, што маем.
 
+## Распрацоўка
+* Каб далучыцца да распрацоўкі, пішыце [Аляксею АйЦіБарадзе](https://vkl.world/@itbeard)
+* Распрацоўка вядзецца ў галіне `develop`
+* Сайт https://letapis.vkl.world збіраецца з галіны `main`
+* [Абмеркаванне праекта](https://github.com/it-beard/writefreely-vkl/discussions)
+* [Бягучы спіс задач на распрацоўку](https://github.com/it-beard/writefreely-vkl/issues)
+
 ## Карысныя спасылкі
 
 * Працуюцы інстанс, сабраны з `mine` галіны гэтага рэпазіторыя - https://letapis.vkl.world
-* [Абмеркаванне праекта](https://github.com/it-beard/writefreely-vkl/discussions)
-* [Бягучы спіс задач на распрацоўку](https://github.com/it-beard/writefreely-vkl/issues)
 * [Арыгінальная інструукцыя па наладах і запуску WriteFreely](https://writefreely.org/docs/latest/developer)
 * [Арыгінальная інструкцыя па запуску на серверах](https://writefreely.org/start)
-* Каб далучыцца да распрацоўкі, пішыце [Аляксею АйЦіБарадзе](https://vkl.world/@itbeard)
