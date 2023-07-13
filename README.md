@@ -1,89 +1,65 @@
-&nbsp;
-<p align="center">
-	<a href="https://writefreely.org"><img src="https://writefreely.org/img/writefreely.svg" width="350px" alt="WriteFreely" /></a>
-</p>
-<hr />
-<p align="center">
-	<a href="https://github.com/writefreely/writefreely/releases/">
-		<img src="https://img.shields.io/github/release/writefreely/writefreely.svg" alt="Latest release" />
-	</a>
-	<a href="https://travis-ci.org/writeas/writefreely">
-		<img src="https://travis-ci.org/writefreely/writefreely.svg" alt="Build status" />
-	</a>
-	<a href="https://github.com/writefreely/writefreely/releases/latest">
-		<img src="https://img.shields.io/github/downloads/writefreely/writefreely/total.svg" />
-	</a>
-	<a href="https://goreportcard.com/report/github.com/writefreely/writefreely">
-		<img src="https://goreportcard.com/badge/github.com/writefreely/writefreely" alt="Go Report Card" />
-	</a>
-	<a href="https://hub.docker.com/r/writeas/writefreely/">
-		<img src="https://img.shields.io/docker/pulls/writeas/writefreely.svg" />
-	</a>
-</p>
-&nbsp;
+## Агульная інфармацыя
 
-WriteFreely is a clean, minimalist publishing platform made for writers. Start a blog, share knowledge within your organization, or build a community around the shared act of writing.
+Гэта рэпазіторый з кодавай базай праекта https://letapis.vkl.world - невялічкай блогавай сістэмы, пабудаванай на базе open-source рухавіка [WriteFleery](https://github.com/writefreely/writefreely).
 
-![](https://writefreely.org/img/screens/pencil-reader.png)
+Рухавік падтрымлівае: 
+* Мнагакарыстальніцкі рэжым
+* Некалькі блогаў на адзін акаўнт
+* Прыватныя, запароленыя ды публічныя блогі
+* Добры інтэрфейс рэдактара з падтрымкай Markdown & HTML
+* Асабістыя стылі блогаў прац карыстальніцкія CSS-стылі
+* Падпіскі на блогі праз RSS і ActivityPub (Fediverse)
+* Стужку з усімі публічнымі блогамі
+* І шмат чаго яшчэ.
 
-[Try the writing experience](https://write.as/new)
+ВАЖНА: У гэтым рэпазіторыі знаходзіцца кодавая база менавіта той версіі рухавіка, якая патрэбна нам. Мы не займаемся падтрымкай усіх яго магчымасцей, а гэты форк з'яўляецца хардфоркам WriteFleery 0.13.2 з несумяшчальнымі змяненнямі.
+Калі вы жадаеце пабудаваць свае блогі на базе нашай версыі рухавіка, то пры адрозных ад letapis.VKL.world наладах файла config.ini мы не гарантуем стабільнасць яго працы і раім выкарыстоўваць апошюю версыю афіцыйнага [WriteFleery](https://github.com/writefreely/writefreely).
 
-[Find an instance](https://writefreely.org/instances)
+Праект напісаны на Go і выкарыстоўвае базу дадзеных MySQL (ці SQLLight).
+Для стылей мы выкарыстоўваем LESS, таму вам спатрэбіцца Node.js, каб скапміляваць іх.
 
-## Features
+## Лакальнае разгортванне
 
-### Made for writing
+### Прэрэквізіты
 
-Built on a plain, auto-saving editor, WriteFreely gives you a distraction-free writing environment. Once published, your words are front and center, and easy to read.
+* Go 1.13+
+* Node.js
 
-### A connected community
+### Build аплікацыі
 
-Start writing together, publicly or privately. Connect with other communities, whether running WriteFreely, [Plume](https://joinplu.me/), or other ActivityPub-powered software. And bring members on board from your existing platforms, thanks to our OAuth 2.0 support.
+1. Кланіруем рэпазіторый сабе лакальна ды пераходзім у папку
+```
+git clone https://github.com/it-beard/writefreely-vkl.git
+cd writefreely
+```
 
-### Intuitive organization
+2.  Усталёўваем пакет `go-bindata` каб скампіляваць фалй `bindata.go` (ён патрабуецца для паспяховага білда далей).
+```
+go get -u github.com/jteeuwen/go-bindata/go-bindata
+go-bindata -pkg writefreely -ignore=\\.gitignore schema.sql sqlite.sql
+```
+2. 1. Вам можа спатрэбіцца самастойна скампіляваць `go-bindata` з зыходнікаў і занесці скампіляваны выканаўчы файл у папку са спісу пераменных асяродзя PATH, каб каманда `go-bindata` запрацавала, бо каманда з пункту 2 працуе не ва ўсіх асяродзях адразу. Вось прыкладны спіс каманд для кампіляцыі `go-bindata`:
+   ```
+   go get github.com/jteeuwen/go-bindata
+   cd $GOPATH/src/github.com/jteeuwen/go-bindata/go-bindata
+   go build
+   ```
+3. Далей трэба адкрыць атрыманы `bindata.go` файл і крыху падправіць у ім памылкі (чамусці ў `bindata.go` з'яўляецца некалькі канфліктуючык імён функцій з аснаўным файлам аплікацыіі `app.go`). Будзе дастаткова проста змяніць назвы дзвух функцый і два месцы іх выклікання ў `bindata.go`:
+```
+schemaSql змяняем на schemaSql1
+sqliteSql змяняем на sqliteSql1
+змяняем назвы функцый і у выкліках ніжэй (два месцы)
+захоўваем файл
+``` 
 
-Categorize articles [with hashtags](https://writefreely.org/docs/latest/writer/hashtags), and create static pages from normal posts by [_pinning_ them](https://writefreely.org/docs/latest/writer/static) to your blog. Create draft posts and publish to multiple blogs from one account.
+4. Білдзім выканаўчы файл `writefreely` з падтрымкай SQLite. (Выдаліце `-tags='sqlite'` калі вам не патрэбна падтрымка SQLite.)
+```
+go build -v -tags='sqlite' ./cmd/writefreely/
+```
 
-### International
+Цяпер вы можаце запусціць WriteFreely! Але вам спатрэбіцца яшчэ адзін крок, каб стварыць некаторыя ассэты і паспяхова запусціць свой лакальны інстанс.
 
-Blog elements are localized in 20+ languages, and WriteFreely includes first-class support for non-Latin and right-to-left (RTL) script languages.
+### Канфігураванне (будзе дапоўнена)
+### Запуск (будзе дапоўнена)
 
-### Private by default
 
-WriteFreely collects minimal data, and never publicizes more than a writer consents to. Writers can seamlessly create multiple blogs from a single account for different pen names or purposes without publicly revealing their association.
-
-<h2><a href="https://write.as/writefreely"><img src="https://writefreely.org/img/writeas-readme.png" height="32px" alt="Write.as" /></a></h2>
-
-The quickest way to deploy WriteFreely is with [Write.as](https://write.as/writefreely), a hosted service from the team behind WriteFreely. You'll get fully-managed installation, backup, upgrades, and maintenance — and directly fund our free software work ❤️
-
-[**Learn more on Write.as**](https://write.as/writefreely).
-
-## Quick start
-
-WriteFreely deploys as a static binary on any platform and architecture that Go supports. Just use our built-in SQLite support, or add a MySQL database, and you'll be up and running!
-
-For common platforms, start with our [pre-built binaries](https://github.com/writefreely/writefreely/releases/) and head over to our [installation guide](https://writefreely.org/start) to get started.
-
-### Packages
-
-You can also find WriteFreely in these package repositories, thanks to our wonderful community!
-
-* [Arch User Repository](https://aur.archlinux.org/packages/writefreely/)
-
-## Documentation
-
-Read our full [documentation on WriteFreely.org](https://writefreely.org/docs) &mdash;️ and help us improve by contributing to the [writefreely/documentation](https://github.com/writefreely/documentation) repo.
-
-## Development
-
-Start hacking on WriteFreely with our [developer setup guide](https://writefreely.org/docs/latest/developer/setup). For Docker support, see our [Docker guide](https://writefreely.org/docs/latest/admin/docker).
-
-## Contributing
-
-We gladly welcome contributions to WriteFreely, whether in the form of [code](https://github.com/writefreely/writefreely/blob/master/CONTRIBUTING.md#contributing-to-writefreely), [bug reports](https://github.com/writefreely/writefreely/issues/new?template=bug_report.md), [feature requests](https://discuss.write.as/c/feedback/feature-requests), [translations](https://poeditor.com/join/project/TIZ6HFRFdE), or [documentation](https://github.com/writefreely/documentation) improvements.
-
-Before contributing anything, please read our [Contributing Guide](https://github.com/writefreely/writefreely/blob/master/CONTRIBUTING.md#contributing-to-writefreely). It describes the correct channels for submitting contributions and any potential requirements.
-
-## License
-
-Copyright © 2018-2022 [Musing Studio LLC](https://musing.studio) and contributing authors. Licensed under the [AGPL](https://github.com/writefreely/writefreely/blob/develop/LICENSE).
