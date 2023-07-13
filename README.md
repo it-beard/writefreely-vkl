@@ -1,4 +1,11 @@
-## Агульная інфармацыя
+<p align="center">
+	<a href="[https://hub.docker.com/r/writeas/writefreely/](https://letapis.vkl.world)">
+		<img src="https://s3-eu-central-1.amazonaws.com/vklworld/site_uploads/files/000/000/002/@2x/034a7c3804534449.png" />
+	</a>
+</p>
+<hr/>
+
+## Агульныя звесткі
 
 Гэта рэпазіторый з кодавай базай праекта https://letapis.vkl.world - невялічкай блогавай сістэмы, пабудаванай на базе open-source рухавіка [WriteFleery](https://github.com/writefreely/writefreely).
 
