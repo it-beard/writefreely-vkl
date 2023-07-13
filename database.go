@@ -932,6 +932,25 @@ func (db *datastore) UpdateCollection(c *SubmittedCollection, alias string) erro
 		}
 	}
 
+	// Update Public Statistics attribute value
+	if c.PublicStatistics {
+		if db.driverName == driverSQLite {
+			_, err = db.Exec("INSERT OR REPLACE INTO collectionattributes (collection_id, attribute, value) VALUES (?, ?, ?)", collID, "public_statistics", "1")
+		} else {
+			_, err = db.Exec("INSERT INTO collectionattributes (collection_id, attribute, value) VALUES (?, ?, ?) "+db.upsert("collection_id", "attribute")+" value = ?", collID, "public_statistics", "1", "1")
+		}
+		if err != nil {
+			log.Error("Unable to insert public_statistics value: %v", err)
+			return err
+		}
+	} else {
+		_, err = db.Exec("DELETE FROM collectionattributes WHERE collection_id = ? AND attribute = ?", collID, "public_statistics")
+		if err != nil {
+			log.Error("Unable to delete public_statistics value: %v", err)
+			return err
+		}
+	}
+
 	// Update Monetization value
 	if c.Monetization != nil {
 		skipUpdate := false
