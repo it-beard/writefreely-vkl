@@ -84,11 +84,12 @@ type (
 		OwnerID uint64
 
 		// Form helpers
-		PreferURL string `schema:"prefer_url" json:"prefer_url"`
-		Privacy   int    `schema:"privacy" json:"privacy"`
-		Pass      string `schema:"password" json:"password"`
-		MathJax   bool   `schema:"mathjax" json:"mathjax"`
-		Handle    string `schema:"handle" json:"handle"`
+		PreferURL        string `schema:"prefer_url" json:"prefer_url"`
+		Privacy          int    `schema:"privacy" json:"privacy"`
+		Pass             string `schema:"password" json:"password"`
+		MathJax          bool   `schema:"mathjax" json:"mathjax"`
+		PublicStatistics bool   `schema:"public_statistics" json:"public_statistics"`
+		Handle           string `schema:"handle" json:"handle"`
 
 		// Actual collection values updated in the DB
 		Alias        *string         `schema:"alias" json:"alias"`
@@ -364,6 +365,10 @@ func (c *Collection) FederatedAccount() string {
 
 func (c *Collection) RenderMathJax() bool {
 	return c.db.CollectionHasAttribute(c.ID, "render_mathjax")
+}
+
+func (c *Collection) PublicStatistics() bool {
+	return c.db.CollectionHasAttribute(c.ID, "public_statistics")
 }
 
 func (c *Collection) MonetizationURL() string {

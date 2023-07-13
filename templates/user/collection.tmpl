@@ -130,6 +130,21 @@ textarea.section.norm {
 	</div>
 
 	<div class="option">
+		<h2>Публічная статыстыка</h2>
+		<div class="section">
+			<p class="explain">Калі гэтая налада ўключана, то ўсе будуць бачыць статыстыку праглядаў вашых допісаў.</p>
+			<ul style="list-style:none">
+				<li>
+					<label>
+						<input type="checkbox" name="public_statistics" {{if .PublicStatistics}}checked="checked"{{end}} />
+						Уключыць публічную статыстыку
+					</label>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="option">
 		<h2>Візуалізацыя тэксту</h2>
 		<div class="section">
 			<p class="explain">Наладзьце спосаб адлюстравання звычайнага тэксту ў вашым блозе.</p>

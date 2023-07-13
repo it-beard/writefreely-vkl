@@ -61,6 +61,9 @@
 				margin: 1em;
 				text-align: left;
 			}
+			article .dt-published {
+				line-height: 1;
+			}
 		</style>
 	</head>
 	<body id="post">
@@ -96,7 +99,12 @@
 				<h2 id="title" class="p-name{{if $.Collection.Format.ShowDates}} dated{{end}}">{{.FormattedDisplayTitle}}</h2>
 			{{end}}
 			{{if and $.Collection.Format.ShowDates (not .IsPinned)}}
-				<div class="dt-published">{{.DisplayDate}}</div>
+				<div class="dt-published">
+					{{.DisplayDate}}
+					{{ if .Collection.PublicStatistics}}
+						<span class="views views-block"><img src="/img/eye-solid.svg"><strong>{{largeNumFmt .Views}}</strong></span>
+					{{ end}}
+				</div>
 			{{end}}
 			<div class="e-content" style="white-space: break-spaces;">{{.HTMLContent}}</div>
 		</article>
@@ -105,8 +113,8 @@
 			<footer class="footer-post">
 				<p style="text-align: left">
 					{{ if .IsOwner }} <span class="views" dir="ltr">Праглядаў: <strong>{{largeNumFmt .Views}}</strong></span>
-					&middot; <a class="xtra-feature" href="/{{if not .SingleUser}}{{.Collection.Alias}}/{{end}}{{.Slug.String}}/edit" dir="{{.Direction}}">Рэдагаваць</a>
-					{{if .IsPinned}} &middot; <a class="xtra-feature unpin" href="/{{.Collection.Alias}}/{{.Slug.String}}/unpin" dir="{{.Direction}}" onclick="unpinPost(event, '{{.ID}}')">Адмацаваць</a>{{end}}
+						&middot; <a class="xtra-feature" href="/{{if not .SingleUser}}{{.Collection.Alias}}/{{end}}{{.Slug.String}}/edit" dir="{{.Direction}}">Рэдагаваць</a>
+						{{ if .IsPinned}} &middot; <a class="xtra-feature unpin" href="/{{.Collection.Alias}}/{{.Slug.String}}/unpin" dir="{{.Direction}}" onclick="unpinPost(event, '{{.ID}}')">Адмацаваць</a>{{end}}
 					{{ end }}
 				</p>
 			</footer>

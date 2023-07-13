@@ -32,6 +32,9 @@
 			{{if not .Title.String}}<a href="{{$.CanonicalURL}}{{.Slug.String}}" itemprop="url">{{end}}
 				{{.DisplayDate}}
 			{{if not .Title.String}}</a>{{end}}
+			{{ if $.Collection.PublicStatistics}}
+			<span class="views views-block"><img src="/img/eye-solid.svg"><strong>{{largeNumFmt .Views}}</strong></span>
+			{{ end}}
 		</div>
 	{{end}}
 {{else}}
