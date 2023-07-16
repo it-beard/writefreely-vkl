@@ -252,6 +252,6 @@ cd ../
 
 ## Карысныя спасылкі
 
-* Працуюцы інстанс, сабраны з `mine` галіны гэтага рэпазіторыя - https://letapis.vkl.world
+* Працуюцы інстанс, сабраны з `main` галіны гэтага рэпазіторыя - https://letapis.vkl.world
 * [Арыгінальная інструукцыя па наладах і запуску WriteFreely](https://writefreely.org/docs/latest/developer)
 * [Арыгінальная інструкцыя па запуску на серверах](https://writefreely.org/start)
