@@ -67,6 +67,7 @@ var migrations = []Migration{
 	New("optimize drafts retrieval", optimizeDrafts),                                    // V8 -> V9
 	New("support post signatures", supportPostSignatures),                               // V9 -> V10
 	New("change description collection length", changeCollectionDescriptionFieldLength), // V10 -> V11
+	New("change description collection length", changePostsContentFieldLength),          // V11 -> V12
 }
 
 // CurrentVer returns the current migration version the application is on
